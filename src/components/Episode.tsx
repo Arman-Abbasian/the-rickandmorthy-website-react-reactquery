@@ -1,6 +1,6 @@
 function Episode() {
   return (
-    <div>Episode</div>
+    <div className="bg-green-10">Episode</div>
   )
 }
 
