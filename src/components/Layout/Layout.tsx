@@ -3,7 +3,7 @@ function Layout() {
   return (
     <div className="flex gap-8 p-4">
         <Navbar />
-        <div className='flex-1 ml-[70px] bg-red-100 p-4'>
+        <div className='flex-1 ml-[70px] bg-red-100 px-10'>
         <Outlet />
         </div>
     </div>
@@ -18,9 +18,11 @@ function Navbar() {
         <aside className="w-15 fixed left-4 top-4 h-screen p-2 bg-slate-700 overflow-y-auto rounded-tl-md rounded-bl-md" >
             <ul className="">
                 <li className=''>
-                    <NavLink to={'episode'}>episode</NavLink>
+                    <NavLink to={''}>episode</NavLink>
                 </li>
-                <li>2</li>
+                <li>
+                <NavLink to={'characters'}>characters</NavLink>
+                </li>
                 <li>3</li>
             </ul>
         </aside>
