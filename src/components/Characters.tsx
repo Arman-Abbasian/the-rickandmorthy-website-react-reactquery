@@ -1,7 +1,7 @@
 
 function Characters() {
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap justify-center gap-4 ">
       <Character />
       <Character />
       <Character />
@@ -17,7 +17,7 @@ import { AiOutlineEye } from "react-icons/ai";
 
 function Character() {
   return (
-    <div className='flex h-20 rounded-md overflow-hidden text-xs bg-blue-200'>
+    <div className='flex h-20 rounded-md overflow-hidden text-xs bg-color-secondary'>
       {/*! image section */}
       <div>
         <img className='w-full h-full object-cover' src='https://rickandmortyapi.com/api/character/avatar/2.jpeg' />
@@ -30,7 +30,7 @@ function Character() {
           <p> ali meira</p>
         </div>
         <div className='flex gap-1 items-center'>
-          <span className="w-2 h-2 rounded-full bg-green-500"></span>
+          <span className="w-2 h-2 rounded-full bg-green-300"></span>
           <p>Alive-</p>
           <p>human</p>
         </div>

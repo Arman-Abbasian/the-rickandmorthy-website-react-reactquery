@@ -3,7 +3,7 @@ function Layout() {
   return (
     <div className="flex gap-8 p-4">
         <Navbar />
-        <div className='flex-1 ml-[66px]  px-10'>
+        <div className='flex-1 ml-[66px]'>
         <Outlet />
         </div>
     </div>
@@ -17,7 +17,7 @@ import { BsPerson } from "react-icons/bs";
 import React, { useState } from 'react';
 function Navbar() {
   return (
-        <aside className="w-16 flex justify-center fixed left-4 top-4 h-screen  bg-slate-700 overflow-y-auto rounded-tl-md rounded-bl-md" >
+        <aside className="w-16 flex justify-center fixed left-4 top-4 h-screen bg-color-dark-primary overflow-y-auto rounded-tl-md rounded-bl-md" >
             <ul className="flex flex-col gap-6 justify w-full ">
                 <SidebarItem text='episodes' to=''><HiOutlineFilm   /></SidebarItem>
                 <SidebarItem text='characters' to='characters'><BsPerson /></SidebarItem>
