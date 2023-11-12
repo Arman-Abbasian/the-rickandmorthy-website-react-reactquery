@@ -2,6 +2,8 @@ import {Routes,Route} from 'react-router-dom'
 import Episode from './components/Episode'
 import Layout from './components/Layout/Layout'
 import Characters from './components/Characters'
+import { Toaster } from 'react-hot-toast';
+
 function App() {
 
   return (
@@ -12,6 +14,7 @@ function App() {
         <Route path='characters' element={<Characters />} />
       </Route>
      </Routes>
+     <Toaster />
     </div>
   )
 }
