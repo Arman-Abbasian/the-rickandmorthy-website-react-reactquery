@@ -3,10 +3,15 @@ import Episode from './components/Episode'
 import Layout from './components/Layout/Layout'
 import Characters from './components/Characters'
 import { Toaster } from 'react-hot-toast';
+import { QueryClientProvider,QueryClient } from '@tanstack/react-query'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools/production'
 
+
+const queryClient = new QueryClient()
 function App() {
 
   return (
+    <QueryClientProvider client={queryClient}>
     <div>
      <Routes>
       <Route path='/' element={<Layout />}>
@@ -16,6 +21,8 @@ function App() {
      </Routes>
      <Toaster />
     </div>
+    <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   )
 }
 

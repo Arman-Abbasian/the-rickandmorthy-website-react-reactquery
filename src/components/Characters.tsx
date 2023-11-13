@@ -1,38 +1,43 @@
 import {useQuery} from '@tanstack/react-query'
 import Pagination from '@mui/material/Pagination';
+import queryString from 'query-string'
+import { Navigate } from "react-router-dom";
 
 
-const fetchCharacters=async(page:number)=>{
-  const data=await axios.get(`https://rickandmortyapi.com/api/character?page=${page}`)
+const fetchCharacters=async(queryFilters:string)=>{
+  const data=await axios.get(`https://rickandmortyapi.com/api/character?${queryFilters}`)
   return data
 }
 
 function Characters() {
   const [page,setPage]=useState<number>(1)
-  const [allPages,setAllPages]=useState<number>(10)
+  const [statusFilter,setStatusFilter]=useState<string[]>([]);
+  const [genderFilter,setGenderFilter]=useState<string[]>([]);
+
+  const queryFilters:string=queryString.stringify({page:page,status:statusFilter,gender:genderFilter});
+  
   const { isLoading, isError, data } = useQuery({
-    queryKey: ['characters',page],
-    queryFn:()=> fetchCharacters(page),
+    queryKey: ['characters',page,statusFilter,genderFilter],
+    queryFn:()=> fetchCharacters(queryFilters),
   });
+
+  
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   };
-  useEffect(()=>{
-    if(data) {
-      setAllPages(data.data.info.pages)
-    }
-  },[])
+
   if(isLoading) return <p>loading ...</p>
   if(isError) return <p>some error...</p>
   if(data) return (
     <div>
-      <FilterCharacter />
+      <Navigate to={`/characters/?${queryFilters}`} />
+      <FilterCharacter genderFilter={genderFilter} setGenderFilter={setGenderFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
     <div className="flex flex-wrap justify-center gap-4 ">
       {data.data.results.map((item:ICharacter)=>{
         return <Character character={item} /> 
       })}
       <div className='flex justify-center items-center mt-16'>
-    <Pagination color="primary" MuiPaginationItem-textSecondary count={allPages} page={page} onChange={handleChange} />
+    <Pagination color="primary" MuiPaginationItem-textSecondary count={data.data.info.pages} page={page} onChange={handleChange} />
       </div>
     </div>
       </div>
@@ -56,7 +61,7 @@ function Character({character}:IProps) {
     <div className='flex h-20 w-80 rounded-md overflow-hidden text-xs bg-color-secondary'>
       {/*! image section */}
       <div>
-        <img className='w-full h-full object-cover' src={character.image} />
+        <img className='w-full h-full object-cover' src={character.image} alt={character.name} />
       </div>
       {/*! info section */}
       <div className='flex-1 flex justify-between items-center gap-16  px-3'>
