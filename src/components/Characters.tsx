@@ -1,4 +1,4 @@
-import {useQuery,useQueryClient} from '@tanstack/react-query'
+import {useQuery} from '@tanstack/react-query'
 import Pagination from '@mui/material/Pagination';
 
 
@@ -11,34 +11,30 @@ function Characters() {
   const [page,setPage]=useState<number>(1)
   const [allPages,setAllPages]=useState<number>(10)
   const { isLoading, isError, data } = useQuery({
-    queryKey: ['characters'],
+    queryKey: ['characters',page],
     queryFn:()=> fetchCharacters(page),
   });
-  const queryClient=useQueryClient();
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-    queryClient.invalidateQueries('characters')
+    setPage(value)
   };
-  console.log(data)
   useEffect(()=>{
     if(data) {
       setAllPages(data.data.info.pages)
-    console.log(data.data.info.pages)
     }
-  },[page])
-  return (
+  },[])
+  if(isLoading) return <p>loading ...</p>
+  if(isError) return <p>some error...</p>
+  if(data) return (
     <div>
+      <FilterCharacter />
     <div className="flex flex-wrap justify-center gap-4 ">
-      {isLoading && <p>loading...</p>}
-      {isError && <p>console.error();
-      </p>}
-      {data &&  data.data.results.map((item:ICharacter)=>{
-        return <Character character={item} />
+      {data.data.results.map((item:ICharacter)=>{
+        return <Character character={item} /> 
       })}
-    </div>
-    <div>
-    <Pagination count={allPages} page={page} onChange={handleChange} />
+      <div className='flex justify-center items-center mt-16'>
+    <Pagination color="primary" MuiPaginationItem-textSecondary count={allPages} page={page} onChange={handleChange} />
       </div>
+    </div>
       </div>
   )
 }
@@ -50,6 +46,7 @@ import { AiOutlineEye } from "react-icons/ai";
 import { ICharacter } from "../generalTypes";
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import FilterCharacter from './Layout/FilterCharacter';
 
 interface IProps{
   character:ICharacter
