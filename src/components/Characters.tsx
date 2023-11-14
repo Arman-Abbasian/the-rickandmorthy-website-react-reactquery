@@ -1,7 +1,7 @@
 import {useQuery} from '@tanstack/react-query'
 import Pagination from '@mui/material/Pagination';
 import queryString from 'query-string'
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import {toast} from 'react-hot-toast'
 
 
@@ -12,7 +12,7 @@ interface ISearchParams{
 }
 
 const fetchCharacters=async(queryFilters:string)=>{
-  const data=await axios.get(`https://rickandmortyapi.com/api/characte?${queryFilters}`)
+  const data=await axios.get(`https://rickandmortyapi.com/api/character?${queryFilters}`)
   return data
 }
 
@@ -56,7 +56,7 @@ useEffect(()=>{
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   };
-console.log(chracterQueryError)
+
   if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
   if(isError) return <div>{toast.error(chracterQueryError?.response?.data?.error)}</div>
   if(data) return (
@@ -115,7 +115,7 @@ function Character({character}:IProps) {
           <p>{character.species}</p>
         </div>
         </div>
-        <AiOutlineEye className="mobile-icon hover:cursor-pointer"/>
+        <Link to={`/characters/${(character.id.toString())}`}><AiOutlineEye className="mobile-icon hover:cursor-pointer"/></Link>
       </div>
     </div>
   )
