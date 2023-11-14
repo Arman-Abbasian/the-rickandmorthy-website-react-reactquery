@@ -57,7 +57,7 @@ useEffect(()=>{
     setPage(value)
   };
 console.log(chracterQueryError)
-  if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader size={50} /></div>
+  if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
   if(isError) return <div>{toast.error(chracterQueryError?.response?.data?.error)}</div>
   if(data) return (
     <div>

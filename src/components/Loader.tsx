@@ -3,12 +3,12 @@ import { RingLoader } from "react-spinners";
 
   
 interface ILoaderProps{
-    size:number
+    size:number;
 }
 function Loader({size}:ILoaderProps) {
   return (
     <RingLoader
-        color="#7c3aed"
+        color="var(--color-secondary)"
         size={size}
       />
   )

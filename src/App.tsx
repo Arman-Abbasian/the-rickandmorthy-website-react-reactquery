@@ -19,7 +19,7 @@ function App() {
         <Route path='characters' element={<Characters />} />
       </Route>
      </Routes>
-     <Toaster />
+     <Toaster toastOptions={{style:{backgroundColor:"var(--color-dark-primary)",color:"var(--color-text)",fontSize:"14px"}}} />
     </div>
     <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
