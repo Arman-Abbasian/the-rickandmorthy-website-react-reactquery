@@ -56,7 +56,7 @@ useEffect(()=>{
     setPage(value)
   };
 
-  if(isLoading) return <p>loading ...</p>
+  if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader size={50} /></div>
   if(isError) return <p>some error...</p>
   if(data) return (
     <div>
@@ -86,6 +86,7 @@ import { ICharacter } from "../generalTypes";
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import FilterCharacter from './Layout/FilterCharacter';
+import Loader from './Loader';
 
 interface IProps{
   character:ICharacter

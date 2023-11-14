@@ -15,4 +15,8 @@ body{
 font-family: 'Libre Franklin', sans-serif;
 background-color:#334155;
 color: #CBD5E1;
+--color-primary: #334155;
+--color-secondary: #7c3aed,
+--color-text: #CBD5E1,
+--color-dark-primary:#1E293B,
 }
