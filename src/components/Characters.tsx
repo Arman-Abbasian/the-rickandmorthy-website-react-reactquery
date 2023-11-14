@@ -2,6 +2,7 @@ import {useQuery} from '@tanstack/react-query'
 import Pagination from '@mui/material/Pagination';
 import queryString from 'query-string'
 import { Navigate } from "react-router-dom";
+import {toast} from 'react-hot-toast'
 
 
 interface ISearchParams{
@@ -11,7 +12,7 @@ interface ISearchParams{
 }
 
 const fetchCharacters=async(queryFilters:string)=>{
-  const data=await axios.get(`https://rickandmortyapi.com/api/character?${queryFilters}`)
+  const data=await axios.get(`https://rickandmortyapi.com/api/characte?${queryFilters}`)
   return data
 }
 
@@ -47,7 +48,7 @@ useEffect(()=>{
   const queryFilters:string=queryString.stringify(searchParams);
   
   //! useQuery function
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data,error:chracterQueryError } = useQuery({
     queryKey: ['characters',page,statusFilter,genderFilter],
     queryFn:()=> fetchCharacters(queryFilters),
   });
@@ -55,9 +56,9 @@ useEffect(()=>{
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   };
-
+console.log(chracterQueryError)
   if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader size={50} /></div>
-  if(isError) return <p>some error...</p>
+  if(isError) return <div>{toast.error(chracterQueryError?.response?.data?.error)}</div>
   if(data) return (
     <div>
       <Navigate to={`/characters/?${queryFilters}`} />
