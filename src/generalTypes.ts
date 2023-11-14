@@ -16,3 +16,8 @@ export interface ICharacter {
     url: string;
     created: string;
   }
+
+  export interface IRadioItem{
+    value:string;
+    label:string
+  }

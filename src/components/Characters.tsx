@@ -4,24 +4,47 @@ import queryString from 'query-string'
 import { Navigate } from "react-router-dom";
 
 
+interface ISearchParams{
+  page:number;
+  status?:string;
+  gender?:string;
+}
+
 const fetchCharacters=async(queryFilters:string)=>{
   const data=await axios.get(`https://rickandmortyapi.com/api/character?${queryFilters}`)
   return data
 }
 
 function Characters() {
-  const [page,setPage]=useState<number>(1)
-  const [statusFilter,setStatusFilter]=useState<string[]>([]);
-  const [genderFilter,setGenderFilter]=useState<string[]>([]);
+  const initialStatus:string= localStorage.getItem("statusFilter") ? localStorage.getItem("statusFilter")! :"";
+  const initialGender:string= localStorage.getItem("genderFilter") ? localStorage.getItem("genderFilter")! :"";
 
-  const queryFilters:string=queryString.stringify({page:page,status:statusFilter,gender:genderFilter});
+  const [page,setPage]=useState<number>(1)
+  const [statusFilter,setStatusFilter]=useState<string>(initialStatus);
+  const [genderFilter,setGenderFilter]=useState<string>(initialGender);
+useEffect(()=>{
+  setPage(1)
+},[statusFilter,genderFilter])
+  if(statusFilter){
+    localStorage.setItem("statusFilter",statusFilter)
+  }else {
+    localStorage.removeItem("statusFilter")
+  }
+  if(genderFilter){
+    localStorage.setItem("genderFilter",genderFilter)
+  }else localStorage.removeItem("genderFilter")
+  const searchParams:ISearchParams={page:page};
+  if(statusFilter) searchParams.status=statusFilter
+  if(genderFilter) searchParams.gender=genderFilter
+
+  const queryFilters:string=queryString.stringify(searchParams);
   
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data,error } = useQuery({
     queryKey: ['characters',page,statusFilter,genderFilter],
     queryFn:()=> fetchCharacters(queryFilters),
   });
+  console.log(error)
 
-  
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   };
