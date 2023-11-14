@@ -17,6 +17,16 @@ export interface ICharacter {
     created: string;
   }
 
+  export interface IEpisode{
+      id: number;
+      name: string;
+      air_date: string;
+      episode: string;
+      characters: string[]|object;
+      url: string;
+      created: string;
+    }
+
   export interface IRadioItem{
     value:string;
     label:string
