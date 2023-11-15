@@ -4,6 +4,8 @@ import {useQuery} from '@tanstack/react-query'
 import Loader from "./Loader";
 import toast from "react-hot-toast";
 import { ICharacter, IEpisode } from "../generalTypes";
+import { HiOutlineFilm } from "react-icons/hi";
+import { BsArrowDownCircle } from "react-icons/bs";
 
 
 const fetchCharacter=async(paramId:string)=>{
@@ -17,8 +19,13 @@ const fetchCharacter=async(paramId:string)=>{
   
 
 function CharacterDetail() {
+  const [sortEpisode,setSortEpisode]=useState<boolean>(true)
     const {id:paramId}=useParams();
 
+    const changeSort=()=>{
+      console.log("first")
+      setSortEpisode((prev)=>!prev)
+    }
         //! useQuery function
         const { isLoading, isError, data,error:chracterQueryError } = useQuery({
             queryKey: ['characters',paramId],
@@ -39,19 +46,35 @@ function CharacterDetail() {
             queryFn:()=> fetchCharacterEpisodes(episodesArray),
             enabled:episodesArray.length>0
           });
+          let sortedEpisodes:IEpisode[]=[];
+          if(charachterEpisodeData){
+            if(sortEpisode){
+              sortedEpisodes= [charachterEpisodeData.data].flat().sort((a,b)=>+new Date(b.created) - +new Date(a.created))
+          
+          }else{
+            sortedEpisodes= [charachterEpisodeData.data].flat().sort((a,b)=>+new Date(a.created) - +new Date(b.created))
+          }
+          console.log(sortedEpisodes)
+        }
+        
 
-      console.log(charachterEpisodeData)
     if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
     if(isError) return <div>{toast.error(chracterQueryError?.response?.data?.error)}</div>
-    if(data &&charachterEpisodeData)return (
+    if(data && sortedEpisodes.length>0)return (
     <div className="flex flex-col gap-5">
         <CharacterDetailMain character={data.data} />
-        <div className='flex flex-col  w-72 h-96 overflow-y-auto rounded-md text-xs bg-color-secondary'>
+        <div className='flex flex-col p-2  w-72 max-h-96 overflow-y-auto rounded-md text-xs bg-color-secondary'>
+          <header  className="flex justify-between items-center mb-4">
+            <HiOutlineFilm className="mobile-icon"/>
+            <button onClick={changeSort} ><BsArrowDownCircle className={`mobile-icon transition-all duration-300 ${sortEpisode?'rotate0':'rotate-180'}`} /></button>
+          </header>
+          <div className="flex flex-col gap-2">
           {
-          [charachterEpisodeData.data].flat().map((item:IEpisode,index:number)=>(
+          sortedEpisodes.map((item:IEpisode,index:number)=>(
             <CharacterDetailEpisodes rowNumber={String(index+1).padStart(2,"0")} episode={item} />
             ))
           }
+          </div>
         
         </div>
     </div>
@@ -63,7 +86,7 @@ export default CharacterDetail;
 
 import { FcBusinesswoman, FcBusinessman } from "react-icons/fc";
 import { CiLocationOn ,  } from "react-icons/ci";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 interface ICharacterDetailMainProps{
     character:ICharacter;
 }
