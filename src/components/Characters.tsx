@@ -7,6 +7,7 @@ import {toast} from 'react-hot-toast'
 
 interface ISearchParams{
   page:number;
+  name?:string;
   status?:string;
   gender?:string;
 }
@@ -22,14 +23,17 @@ function Characters() {
   const initialGender:string= localStorage.getItem("genderFilter") ? localStorage.getItem("genderFilter")! :"";
 
   //! 3 state to handle the change of 3 querystring filter 
-  const [page,setPage]=useState<number>(1)
+  const [page,setPage]=useState<number>(1);
+  const [name,setName]=useState<string>("");
   const [statusFilter,setStatusFilter]=useState<string>(initialStatus);
   const [genderFilter,setGenderFilter]=useState<string>(initialGender);
+  
   //!this useEffect handle the change of all pages when change the status and gender state
   //!and setPages to 1 for pretend the error
 useEffect(()=>{
   setPage(1)
-},[statusFilter,genderFilter])
+},[name,statusFilter,genderFilter])
+
 
 //!store the changes of statusFilter & genderFilter states in localStorage
   if(statusFilter){
@@ -41,6 +45,7 @@ useEffect(()=>{
     localStorage.setItem("genderFilter",genderFilter)
   }else localStorage.removeItem("genderFilter")
   const searchParams:ISearchParams={page:page};
+  if(name.length>=3) searchParams.name=name
   if(statusFilter) searchParams.status=statusFilter
   if(genderFilter) searchParams.gender=genderFilter
 
@@ -49,7 +54,7 @@ useEffect(()=>{
   
   //! useQuery function
   const { isLoading, isError, data,error:chracterQueryError } = useQuery({
-    queryKey: ['characters',page,statusFilter,genderFilter],
+    queryKey: ['characters',page,name,statusFilter,genderFilter],
     queryFn:()=> fetchCharacters(queryFilters),
   });
 
@@ -62,7 +67,7 @@ useEffect(()=>{
   if(data) return (
     <div>
       <Navigate to={`/characters/?${queryFilters}`} />
-      <FilterCharacter genderFilter={genderFilter} setGenderFilter={setGenderFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
+      <FilterCharacter searchValue={name} changeHandler={(e)=>setName(e.target.value)} genderFilter={genderFilter} setGenderFilter={setGenderFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
       <div>
     <div className="flex flex-wrap justify-center gap-4 ">
       {data.data.results.map((item:ICharacter)=>{

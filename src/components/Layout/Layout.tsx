@@ -15,6 +15,7 @@ export default Layout
 import { HiOutlineFilm } from "react-icons/hi";
 import { BsPerson } from "react-icons/bs";
 import React, { useState } from 'react';
+
 function Navbar() {
   return (
         <aside className="w-16 flex justify-center fixed left-4 top-4 h-screen bg-color-dark-primary overflow-y-auto rounded-tl-md rounded-bl-md" >
