@@ -79,7 +79,7 @@ function Episode({episode,characters}:IEpisodeProps) {
           <div className="flex flex-col gap-0.5">
           {characters && [characters].flat().map((character:ICharacter)=>{
             return <div className="flex items-center gap-2" >
-                <div className="w-5 h-5 rounded-full overflow-hidden"><img className='w-full h-full object-cover' src={character.image} alt={character.name} /></div>
+                <div className="w-5 h-5 rounded-full "><img className='w-full h-full object-cover' src={character.image} alt={character.name} /></div>
                 <p>{character.name.length>13 ? character.name.substring(0,13)+"...":character.name}</p>
             </div>
           })}
