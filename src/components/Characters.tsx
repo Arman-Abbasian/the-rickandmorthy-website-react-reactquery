@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import queryString from 'query-string'
 import { Link, Navigate } from "react-router-dom";
 import {toast} from 'react-hot-toast'
-
+import ReactSelectFilter, { IReactSelectOption } from './FilterComponents/ReactSelect';
 
 interface ISearchParams{
   page:number;
@@ -27,13 +27,13 @@ function Characters() {
   const [name,setName]=useState<string>("");
   const [statusFilter,setStatusFilter]=useState<string>(initialStatus);
   const [genderFilter,setGenderFilter]=useState<string>(initialGender);
-  
+  const [reactSelectOption,setReactSelectOption]=useState<IReactSelectOption[]>([])
   //!this useEffect handle the change of all pages when change the status and gender state
   //!and setPages to 1 for pretend the error
 useEffect(()=>{
   setPage(1)
 },[name,statusFilter,genderFilter])
-
+const ref=useRef([] as IReactSelectOption[])
 
 //!store the changes of statusFilter & genderFilter states in localStorage
   if(statusFilter){
@@ -62,13 +62,35 @@ useEffect(()=>{
     setPage(value)
   };
 
-  if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
-  if(isError) return <div>{toast.error(chracterQueryError?.response?.data?.error)}</div>
-  if(data) return (
+  useEffect(()=>{
+    axios.get("https://rickandmortyapi.com/api/character")
+    .then(({data})=>{
+      console.log(data)
+      const characters:ICharacter[]=data.results
+      setReactSelectOption(characters.map(item=>({label:item.name,value:item.name}))) 
+    })
+    .catch(err=>toast.error(err.data.message))
+  },[])
+
+  if(data)
+{
+  const characters:ICharacter[]=data.data.results;
+  ref.current=(characters.map(item=>({label:item.name,value:item.name})))
+}
+
+const chnageReaceSelectHandler=(e:unknown)=>{
+  setName(e.value)
+}
+return (
     <div>
+       <ReactSelectFilter options={reactSelectOption} chnageReaceSelectHandler={chnageReaceSelectHandler}  />
+      <FilterCharacter searchValue={name}  changeHandler={(e)=>setName(e.target.value)} 
+      genderFilter={genderFilter} setGenderFilter={setGenderFilter} 
+      statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
+      {isLoading ? <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
+      :isError ? <div>{toast.error(chracterQueryError?.response?.data?.error)}</div> 
+      :data && <div>
       <Navigate to={`/characters/?${queryFilters}`} />
-      <FilterCharacter searchValue={name} changeHandler={(e)=>setName(e.target.value)} genderFilter={genderFilter} setGenderFilter={setGenderFilter} statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
-      <div>
     <div className="flex flex-wrap justify-center gap-4 ">
       {data.data.results.map((item:ICharacter)=>{
         return <Character character={item} /> 
@@ -78,6 +100,10 @@ useEffect(()=>{
     <Pagination color="primary" MuiPaginationItem-textSecondary count={data.data.info.pages} page={page} onChange={handleChange} />
       </div>
     </div>
+
+    }
+     
+      
       </div>
   )
 }
@@ -90,9 +116,10 @@ import { FcBusinesswoman, FcBusinessman } from "react-icons/fc";
 import { AiOutlineEye } from "react-icons/ai";
 import { ICharacter } from "../generalTypes";
 import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import FilterCharacter from './Layout/FilterCharacter';
 import Loader from './Loader';
+import ReactSelect from 'react-select';
 
 interface IProps{
   character:ICharacter

@@ -39,7 +39,6 @@ function FilterCharacter({genderFilter,setGenderFilter,setStatusFilter,statusFil
     <div className="flex flex-col gap-3 mb-8">
       <AsyncSelectOption placeHolder="search characte name ..." 
       unique="searchCharacter" changeHandler={changeHandler} searchValue={searchValue} />
-        <SearchInput placeHolder="search character ..." unique="characterName" />
         <CheckBoxComponent filterState={statusFilter} changeHandler={changeStatusHandler} title="status" arr={status} />
         <CheckBoxComponent filterState={genderFilter} changeHandler={changeGenderHandler} title="gender" arr={gender} />
     </div>
