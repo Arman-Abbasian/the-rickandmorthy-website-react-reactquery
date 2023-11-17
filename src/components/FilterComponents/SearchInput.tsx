@@ -2,7 +2,7 @@ import { useState } from "react";
 
 interface ISearchInputProps{
   unique:string;
-    placeHolder:string
+  placeHolder:string
   }
   
   function SearchInput({unique,placeHolder}:ISearchInputProps) {

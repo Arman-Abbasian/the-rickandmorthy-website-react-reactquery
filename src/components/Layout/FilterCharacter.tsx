@@ -1,7 +1,6 @@
 import { IRadioItem } from "../../generalTypes";
-import AsyncSelectOption from "../FilterComponents/AsyncSelectOption";
 import CheckBoxComponent from "../FilterComponents/RadioButton";
-import SearchInput from "../FilterComponents/SearchInput";
+import ReactSelectFilter, { IReactSelectOption } from "../FilterComponents/ReactSelectFilter";
 
 interface IFilterCharacterProps{
   statusFilter:string;
@@ -9,8 +8,11 @@ interface IFilterCharacterProps{
   genderFilter:string;
   setGenderFilter:React.Dispatch<React.SetStateAction<string>>;
   searchValue:string;
-    changeHandler:(e:React.ChangeEvent<HTMLInputElement>)=>void
+    changeHandler:(e:React.ChangeEvent<HTMLInputElement>)=>void;
+  options:IReactSelectOption[];
+  chnageReaceSelectHandler:(e:unknown)=>void
 }
+
 
 const status:IRadioItem[]=[
   {value:"",label:"all"},
@@ -26,7 +28,7 @@ const gender:IRadioItem[]=[
   {value:"unknown",label:"unknown"}
 ]
 
-function FilterCharacter({genderFilter,setGenderFilter,setStatusFilter,statusFilter,changeHandler,searchValue}:IFilterCharacterProps) {
+function FilterCharacter({genderFilter,setGenderFilter,setStatusFilter,statusFilter,options,chnageReaceSelectHandler}:IFilterCharacterProps) {
   
 
   const changeStatusHandler=(e:React.ChangeEvent<HTMLInputElement>)=>{
@@ -37,8 +39,7 @@ function FilterCharacter({genderFilter,setGenderFilter,setStatusFilter,statusFil
   }
   return (
     <div className="flex flex-col gap-3 mb-8">
-      <AsyncSelectOption placeHolder="search characte name ..." 
-      unique="searchCharacter" changeHandler={changeHandler} searchValue={searchValue} />
+      <ReactSelectFilter chnageReaceSelectHandler={chnageReaceSelectHandler} options={options} />
         <CheckBoxComponent filterState={statusFilter} changeHandler={changeStatusHandler} title="status" arr={status} />
         <CheckBoxComponent filterState={genderFilter} changeHandler={changeGenderHandler} title="gender" arr={gender} />
     </div>

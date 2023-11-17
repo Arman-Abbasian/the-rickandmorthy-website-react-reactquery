@@ -31,3 +31,47 @@ export interface ICharacter {
     value:string;
     label:string
   }
+
+
+  // ! error response
+
+  interface Config {
+    transitional: Transitional;
+    adapter: string[];
+    transformRequest: null[];
+    transformResponse: null[];
+    timeout: number;
+    xsrfCookieName: string;
+    xsrfHeaderName: string;
+    maxContentLength: number;
+    maxBodyLength: number;
+    env: Env;
+    headers: Headers;
+    method: string;
+    url: string;
+  }
+  
+  interface Headers {
+    Accept: string;
+  }
+  
+  interface Env {
+  }
+  
+  interface Transitional {
+    silentJSONParsing: boolean;
+    forcedJSONParsing: boolean;
+    clarifyTimeoutError: boolean;
+  }
+ export interface IErrorResponse {
+    message: string;
+    name: string;
+    stack: string;
+    config: Config;
+    code: string;
+    status: number;
+  }
+  
+ 
+  
+  

@@ -3,7 +3,9 @@ import Pagination from '@mui/material/Pagination';
 import queryString from 'query-string'
 import { Link, Navigate } from "react-router-dom";
 import {toast} from 'react-hot-toast'
-import ReactSelectFilter, { IReactSelectOption } from './FilterComponents/ReactSelect';
+import  { IReactSelectOption } from './FilterComponents/ReactSelectFilter';
+import { AxiosError } from 'axios' 
+
 
 interface ISearchParams{
   page:number;
@@ -53,7 +55,7 @@ const ref=useRef([] as IReactSelectOption[])
   const queryFilters:string=queryString.stringify(searchParams);
   
   //! useQuery function
-  const { isLoading, isError, data,error:chracterQueryError } = useQuery({
+  const { isLoading, isError, data,error:charactersError } = useQuery({
     queryKey: ['characters',page,name,statusFilter,genderFilter],
     queryFn:()=> fetchCharacters(queryFilters),
   });
@@ -79,16 +81,17 @@ const ref=useRef([] as IReactSelectOption[])
 }
 
 const chnageReaceSelectHandler=(e:unknown)=>{
-  setName(e.value)
+ ( e as IReactSelectOption).value
 }
+if(isError) console.log(charactersError)
 return (
     <div>
-       <ReactSelectFilter options={reactSelectOption} chnageReaceSelectHandler={chnageReaceSelectHandler}  />
       <FilterCharacter searchValue={name}  changeHandler={(e)=>setName(e.target.value)} 
+      options={reactSelectOption} chnageReaceSelectHandler={chnageReaceSelectHandler}
       genderFilter={genderFilter} setGenderFilter={setGenderFilter} 
       statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
-      {isLoading ? <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
-      :isError ? <div>{toast.error(chracterQueryError?.response?.data?.error)}</div> 
+      {isLoading ? <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div >
+      :isError && charactersError instanceof AxiosError ? <div>{toast.error(charactersError?.response?.data.error)}</div> 
       :data && <div>
       <Navigate to={`/characters/?${queryFilters}`} />
     <div className="flex flex-wrap justify-center gap-4 ">
@@ -119,7 +122,7 @@ import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import FilterCharacter from './Layout/FilterCharacter';
 import Loader from './Loader';
-import ReactSelect from 'react-select';
+
 
 interface IProps{
   character:ICharacter
