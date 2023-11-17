@@ -3,16 +3,16 @@ import Select from "react-select";
 
 export interface IReactSelectOption{
     label:string;
-    value:string
+    value:string;
 }
 interface IReactSelectProps{
     options:IReactSelectOption[];
     chnageReaceSelectHandler:(e:unknown)=>void
 }
-function ReactSelectFilter({options,chnageReaceSelectHandler}:IReactSelectProps) {
+function ReactSelectFilter({options,chnageReaceSelectHandler,}:IReactSelectProps) {
   const animatedComponents = makeAnimated();
   return (
-    <div>
+    <div className="flex-1">
         <Select options={options} 
         onChange={chnageReaceSelectHandler} 
         placeholder="select a name ..."

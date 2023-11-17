@@ -13,6 +13,7 @@ function Layout() {
 export default Layout
 
 import { HiOutlineFilm } from "react-icons/hi";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 import { BsPerson } from "react-icons/bs";
 import React, { useState } from 'react';
 
@@ -22,6 +23,8 @@ function Navbar() {
             <ul className="flex flex-col gap-6 justify w-full ">
                 <SidebarItem text='episodes' to=''><HiOutlineFilm   /></SidebarItem>
                 <SidebarItem text='characters' to='characters'><BsPerson /></SidebarItem>
+                <SidebarItem text='characters' to='characters'><IoIosInformationCircleOutline /></SidebarItem>
+                
             </ul>
         </aside>
   )

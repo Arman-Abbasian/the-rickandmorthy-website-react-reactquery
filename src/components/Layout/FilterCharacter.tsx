@@ -7,8 +7,6 @@ interface IFilterCharacterProps{
   setStatusFilter:React.Dispatch<React.SetStateAction<string>>;
   genderFilter:string;
   setGenderFilter:React.Dispatch<React.SetStateAction<string>>;
-  searchValue:string;
-    changeHandler:(e:React.ChangeEvent<HTMLInputElement>)=>void;
   options:IReactSelectOption[];
   chnageReaceSelectHandler:(e:unknown)=>void
 }
@@ -38,7 +36,7 @@ function FilterCharacter({genderFilter,setGenderFilter,setStatusFilter,statusFil
     setGenderFilter(e.target.value)
   }
   return (
-    <div className="flex flex-col gap-3 mb-8">
+    <div className="flex flex-col gap-3  mb-8 ml-2 w-full lg:flex-row">
       <ReactSelectFilter chnageReaceSelectHandler={chnageReaceSelectHandler} options={options} />
         <CheckBoxComponent filterState={statusFilter} changeHandler={changeStatusHandler} title="status" arr={status} />
         <CheckBoxComponent filterState={genderFilter} changeHandler={changeGenderHandler} title="gender" arr={gender} />

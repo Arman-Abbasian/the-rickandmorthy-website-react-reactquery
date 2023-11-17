@@ -9,7 +9,7 @@ interface ICheckBoxComponentProps{
 
 function RadioComponent({arr,filterState,title,changeHandler}:ICheckBoxComponentProps) {
   return (
-    <div className="ring-1 ring-color-secondary rounded-sm px-3 py-1">
+    <div className="ring-1 ring-color-secondary rounded-sm px-3 py-1 flex-1">
       <h2 className="mb-3">{title}</h2>
     <div className="flex flex-wrap items-center gap-3"> 
     {arr.map(item=><RadioItem checked={filterState===item.value?true:false} changeHandler={changeHandler}  radioId={item.value} label={item.label} key={item.value} />)}

@@ -81,12 +81,12 @@ const ref=useRef([] as IReactSelectOption[])
 }
 
 const chnageReaceSelectHandler=(e:unknown)=>{
- ( e as IReactSelectOption).value
+ setName(( e as IReactSelectOption).value)
 }
 if(isError) console.log(charactersError)
 return (
     <div>
-      <FilterCharacter searchValue={name}  changeHandler={(e)=>setName(e.target.value)} 
+      <FilterCharacter 
       options={reactSelectOption} chnageReaceSelectHandler={chnageReaceSelectHandler}
       genderFilter={genderFilter} setGenderFilter={setGenderFilter} 
       statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
