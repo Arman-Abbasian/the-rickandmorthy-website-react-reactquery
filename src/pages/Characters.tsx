@@ -3,7 +3,7 @@ import Pagination from '@mui/material/Pagination';
 import queryString from 'query-string'
 import { Link, Navigate } from "react-router-dom";
 import {toast} from 'react-hot-toast'
-import  { IReactSelectOption } from './FilterComponents/ReactSelectFilter';
+import  { IReactSelectOption } from '../components/FilterComponents/ReactSelectFilter';
 import { AxiosError } from 'axios' 
 
 
@@ -83,7 +83,7 @@ const ref=useRef([] as IReactSelectOption[])
 const chnageReaceSelectHandler=(e:unknown)=>{
  setName(( e as IReactSelectOption).value)
 }
-if(isError) console.log(charactersError)
+
 return (
     <div>
       <FilterCharacter 
@@ -120,8 +120,8 @@ import { AiOutlineEye } from "react-icons/ai";
 import { ICharacter } from "../generalTypes";
 import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
-import FilterCharacter from './Layout/FilterCharacter';
-import Loader from './Loader';
+import FilterCharacter from '../components/Layout/FilterCharacter';
+import Loader from '../components/Loader';
 
 
 interface IProps{

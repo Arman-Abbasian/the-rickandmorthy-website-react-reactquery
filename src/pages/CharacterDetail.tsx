@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import {useQuery} from '@tanstack/react-query'
-import Loader from "./Loader";
+import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import { ICharacter, IEpisode } from "../generalTypes";
 import { HiOutlineFilm } from "react-icons/hi";
@@ -33,7 +33,7 @@ function CharacterDetail() {
             queryFn:()=> fetchCharacter(paramId!),
           });
 
-          let episodesArray:string[]=[];
+      let episodesArray:string[]=[];
       const episodes=data?.data?.episode;
       if(Array.isArray(episodes)){
        const arr= episodes?.map(item=>item.split("/").at(-1))
