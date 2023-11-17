@@ -3,7 +3,7 @@ function Layout() {
   return (
     <div className="flex gap-8 p-4">
         <Navbar />
-        <div className='flex-1 ml-[66px]'>
+        <div className='flex-1 ml-[80px] flex justify-center w-full '>
         <Outlet />
         </div>
     </div>
@@ -24,7 +24,6 @@ function Navbar() {
                 <SidebarItem text='episodes' to=''><HiOutlineFilm   /></SidebarItem>
                 <SidebarItem text='characters' to='characters'><BsPerson /></SidebarItem>
                 <SidebarItem text='characters' to='characters'><IoIosInformationCircleOutline /></SidebarItem>
-                
             </ul>
         </aside>
   )

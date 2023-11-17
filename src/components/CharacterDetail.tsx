@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { ICharacter, IEpisode } from "../generalTypes";
 import { HiOutlineFilm } from "react-icons/hi";
 import { BsArrowDownCircle } from "react-icons/bs";
+import { AxiosError } from 'axios' 
 
 
 const fetchCharacter=async(paramId:string)=>{
@@ -59,9 +60,9 @@ function CharacterDetail() {
         
 
     if(isLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
-    if(isError) return <div>{toast.error(chracterQueryError?.response?.data?.error)}</div>
+    if(isError && chracterQueryError instanceof AxiosError) return <div>{toast.error(chracterQueryError?.response?.data?.error)}</div>
     if(data && sortedEpisodes.length>0)return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 max-w-xl  items-center container mx-auto md:flex-row md:gap-10 md:items-start">
         <CharacterDetailMain character={data.data} />
         <div className='flex flex-col p-2  w-72 max-h-96 overflow-y-auto rounded-md text-xs bg-color-secondary'>
           <header  className="flex justify-between items-center mb-4">

@@ -36,10 +36,12 @@ function FilterCharacter({genderFilter,setGenderFilter,setStatusFilter,statusFil
     setGenderFilter(e.target.value)
   }
   return (
-    <div className="flex flex-col gap-3  mb-8 ml-2 w-full lg:flex-row">
+    <div className=" mb-8 ml-2 w-full ">
+      <div className="container max-w-sm mx-auto flex flex-col gap-3">
       <ReactSelectFilter chnageReaceSelectHandler={chnageReaceSelectHandler} options={options} />
         <CheckBoxComponent filterState={statusFilter} changeHandler={changeStatusHandler} title="status" arr={status} />
         <CheckBoxComponent filterState={genderFilter} changeHandler={changeGenderHandler} title="gender" arr={gender} />
+        </div>
     </div>
   )
 }
