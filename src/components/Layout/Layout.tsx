@@ -42,7 +42,7 @@ function SidebarItem({children,to,text}:IProps) {
   const [showText,setShowText]=useState(false)
   return (
     <li className="flex justify-center" onMouseOver={()=>setShowText(true)} onMouseOut={()=>setShowText(false)}>
-                    <NavLink className='hover:bg-color-secondary transition-all duration-500 cursor-pointer w-full flex justify-center p-4' to={to}>{children} <p className={`${showText?'block':'hidden'} text-xs transition-all duration-500`}>{text}</p></NavLink>
+                    <NavLink className='hover:bg-color-secondary transition-all duration-500 cursor-pointer w-full flex justify-center p-4' to={to}><div className={`${showText?'hidden':'block'}`}>{children}</div> <p className={`${showText?'block':'hidden'} text-xs transition-all duration-500`}>{text}</p></NavLink>
                 </li>
   )
 }
