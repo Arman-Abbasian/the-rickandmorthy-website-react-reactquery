@@ -23,7 +23,7 @@ function Navbar() {
             <ul className="flex flex-col gap-6 justify w-full ">
                 <SidebarItem text='episodes' to=''><HiOutlineFilm   /></SidebarItem>
                 <SidebarItem text='characters' to='characters'><BsPerson /></SidebarItem>
-                <SidebarItem text='characters' to='characters'><IoIosInformationCircleOutline /></SidebarItem>
+                <SidebarItem text='info' to='about_me'><IoIosInformationCircleOutline /></SidebarItem>
             </ul>
         </aside>
   )
