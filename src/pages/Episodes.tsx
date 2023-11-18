@@ -63,7 +63,7 @@ interface IEpisodeProps{
 
 function Episode({episode,characters}:IEpisodeProps) {
   return (
-    <div className='flex h-36 w-96 rounded-md overflow-hidden text-xs bg-color-secondary'>
+    <div className='flex h-36 w-[340px] rounded-md overflow-hidden text-xs bg-color-secondary'>
       {/*! image section */}
       <div>
         <img className='w-full h-full object-cover' src={'/images/episodePoster.png'} alt={episode.episode} />
@@ -75,11 +75,11 @@ function Episode({episode,characters}:IEpisodeProps) {
           <p>name: {episode.name.length>20 ? episode.name.substring(0,20)+"...":episode.name}</p>
           <h2  className="font-bold">characters</h2>
         </div>
-        <div className="h-24 overflow-y-auto">
+        <div className="h-24 scrollBar">
           <div className="flex flex-col gap-0.5">
           {characters && [characters].flat().map((character:ICharacter)=>{
             return <div className="flex items-center gap-2" >
-                <div className="w-5 h-5 rounded-full "><img className='w-full h-full object-cover' src={character.image} alt={character.name} /></div>
+                <div className="w-5 h-5 rounded-full overflow-hidden"><img className='w-full h-full object-cover' src={character.image} alt={character.name} /></div>
                 <p>{character.name.length>13 ? character.name.substring(0,13)+"...":character.name}</p>
             </div>
           })}

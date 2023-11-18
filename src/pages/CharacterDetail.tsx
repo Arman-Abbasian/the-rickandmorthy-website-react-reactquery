@@ -64,7 +64,7 @@ function CharacterDetail() {
     if(data && sortedEpisodes.length>0)return (
     <div className="flex flex-col gap-5 max-w-xl  items-center container mx-auto md:flex-row md:gap-10 md:items-start">
         <CharacterDetailMain character={data.data} />
-        <div className='flex flex-col p-2  w-72 max-h-96 overflow-y-auto rounded-md text-xs bg-color-secondary'>
+        <div className='flex flex-col p-2  w-72 max-h-96 scrollBar rounded-md text-xs bg-color-secondary'>
           <header  className="flex justify-between items-center mb-4">
             <HiOutlineFilm className="mobile-icon"/>
             <button onClick={changeSort} ><BsArrowDownCircle className={`mobile-icon transition-all duration-300 ${sortEpisode?'rotate0':'rotate-180'}`} /></button>

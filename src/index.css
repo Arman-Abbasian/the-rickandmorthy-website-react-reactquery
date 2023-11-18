@@ -9,7 +9,9 @@
       width:1.2rem;
       height: 1.2rem;
     }
-    /* ... */
+    .scrollBar{
+      @apply  overflow-y-auto scrollbar-thin scrollbar-thumb-rounded-full scrollbar-track-rounded-full scrollbar-thumb-color-primary scrollbar-track-color-text
+    }
   }
 html, body, #root{
 font-family: 'Libre Franklin', sans-serif;
