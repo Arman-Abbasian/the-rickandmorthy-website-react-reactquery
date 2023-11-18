@@ -4,9 +4,20 @@ import {useQuery} from '@tanstack/react-query';
 import { AxiosError } from 'axios' 
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
+import {  useState,useEffect } from "react";
+import ReactSelectFilter, { IReactSelectOption } from "../components/FilterComponents/ReactSelectFilter";
+import queryString from "query-string";
+import { Navigate } from "react-router-dom";
 
-const fetchEpisodes=async()=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/episode`)
+
+interface ISearchParams{
+  page:number;
+  name?:string;
+  episode?:string
+}
+const fetchEpisodes=async(queryFilters:string)=>{
+  console.log(queryFilters)
+    const data=await axios.get(`https://rickandmortyapi.com/api/episode?${queryFilters}`)
     return data
   }
   const fetchEpisodeCharacters=async(characters:string[])=>{
@@ -17,11 +28,35 @@ const fetchEpisodes=async()=>{
   
 
 function Episodes() {
-    const { isLoading:isEpisodesLoading, isError:isEpisodesError, data:episodeData,error:episodesError } = useQuery({
-        queryKey: ['episodes'],
-        queryFn:()=> fetchEpisodes(),
-      });
+  const [page,setPage]=useState<number>(1);
+  const [nameFilter,setNameFilter]=useState<string>("");
+  const [episodeFilter,setEpisodeFilter]=useState<string>("");
+  const [reactSelectNamesOption,setReactSelectNamesOption]=useState<IReactSelectOption[]>([])
+  const [reactSelectEpisodesOption,setReactSelectEpisodesOption]=useState<IReactSelectOption[]>([])
 
+  const searchParams:ISearchParams={page:page};
+  if(nameFilter) searchParams.name=nameFilter;
+  if(episodeFilter) searchParams.episode=episodeFilter;
+  const queryFilters:string=queryString.stringify(searchParams);
+  console.log(queryFilters)
+    const { isLoading:isEpisodesLoading, isError:isEpisodesError, data:episodeData,error:episodesError } = useQuery({
+        queryKey: ['episodes',page,nameFilter,episodeFilter],
+        queryFn:()=> fetchEpisodes(queryFilters),
+      });
+      useEffect(()=>{
+        setPage(1)
+      },[nameFilter,episodeFilter])
+
+      useEffect(()=>{
+        axios.get("https://rickandmortyapi.com/api/episode")
+        .then(({data})=>{
+          const episodes:IEpisode[]=data.results
+          console.log(episodes)
+          setReactSelectNamesOption(episodes.map(item=>({label:item.name,value:item.name}))) 
+          setReactSelectEpisodesOption(episodes.map(item=>({label:item.episode,value:item.episode})))
+        })
+        .catch(err=>toast.error(err.data.message))
+      },[])
 
       let charactersArray:string[]=[];
       const characters=episodeData?.data?.characters;
@@ -37,15 +72,30 @@ function Episodes() {
             queryFn:()=> fetchEpisodeCharacters(charactersArray),
             enabled:charactersArray.length>0
           });
+          const chnageReaceSelectNamesHandler=(e:unknown)=>{
+            setNameFilter(( e as IReactSelectOption).value)
+            setEpisodeFilter("")
+           }
+           const chnageReaceSelectEpisodesHandler=(e:unknown)=>{
+            setEpisodeFilter(( e as IReactSelectOption).value)
+            setNameFilter("")
+           }
       if(isEpisodesLoading) return <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>
       if(isEpisodesError && episodesError instanceof AxiosError) return <div>{toast.error(episodesError?.response?.data?.error)}</div>
       if(episodeData)
       return (
-    <div className="flex flex-wrap gap-4">
+    <div>
+      <Navigate to={`/episodes/?${queryFilters}`} />
+      <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8">
+        <ReactSelectFilter options={reactSelectNamesOption} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
+        <ReactSelectFilter options={reactSelectEpisodesOption} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
+      </div>
+    <div className="flex flex-wrap justify-center gap-4">
         {episodeData && episodeCharactersData &&  episodeData.data.results.map((item:IEpisode)=>(
             <Episode episode={item} characters={episodeCharactersData.data.results}   />
         ))}
         
+    </div>
     </div>
   )
 }

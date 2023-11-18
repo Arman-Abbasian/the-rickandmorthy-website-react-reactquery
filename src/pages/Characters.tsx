@@ -47,7 +47,7 @@ const ref=useRef([] as IReactSelectOption[])
     localStorage.setItem("genderFilter",genderFilter)
   }else localStorage.removeItem("genderFilter")
   const searchParams:ISearchParams={page:page};
-  if(name.length>=3) searchParams.name=name
+  if(name) searchParams.name=name;
   if(statusFilter) searchParams.status=statusFilter
   if(genderFilter) searchParams.gender=genderFilter
 
@@ -67,7 +67,6 @@ const ref=useRef([] as IReactSelectOption[])
   useEffect(()=>{
     axios.get("https://rickandmortyapi.com/api/character")
     .then(({data})=>{
-      console.log(data)
       const characters:ICharacter[]=data.results
       setReactSelectOption(characters.map(item=>({label:item.name,value:item.name}))) 
     })
@@ -94,7 +93,7 @@ return (
       :isError && charactersError instanceof AxiosError ? <div>{toast.error(charactersError?.response?.data.error)}</div> 
       :data && <div>
       <Navigate to={`/characters/?${queryFilters}`} />
-    <div className="flex flex-wrap justify-center gap-4 ">
+    <div className="flex flex-wrap justify-center gap-4">
       {data.data.results.map((item:ICharacter)=>{
         return <Character character={item} /> 
       })}
