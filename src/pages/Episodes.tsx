@@ -8,6 +8,8 @@ import {  useState,useEffect } from "react";
 import ReactSelectFilter, { IReactSelectOption } from "../components/FilterComponents/ReactSelectFilter";
 import queryString from "query-string";
 import { Navigate } from "react-router-dom";
+import { Pagination } from "@mui/material";
+import { GroupBase, OptionsOrGroups } from "react-select";
 
 
 interface ISearchParams{
@@ -16,7 +18,6 @@ interface ISearchParams{
   episode?:string
 }
 const fetchEpisodes=async(queryFilters:string)=>{
-  console.log(queryFilters)
     const data=await axios.get(`https://rickandmortyapi.com/api/episode?${queryFilters}`)
     return data
   }
@@ -31,22 +32,25 @@ function Episodes() {
   const [page,setPage]=useState<number>(1);
   const [nameFilter,setNameFilter]=useState<string>("");
   const [episodeFilter,setEpisodeFilter]=useState<string>("");
-  const [reactSelectNamesOption,setReactSelectNamesOption]=useState<IReactSelectOption[]>([])
-  const [reactSelectEpisodesOption,setReactSelectEpisodesOption]=useState<IReactSelectOption[]>([])
+  const [reactSelectNamesOption,setReactSelectNamesOption]=useState<OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>>([])
+  const [reactSelectEpisodesOption,setReactSelectEpisodesOption]=useState<OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>>([])
 
   const searchParams:ISearchParams={page:page};
   if(nameFilter) searchParams.name=nameFilter;
   if(episodeFilter) searchParams.episode=episodeFilter;
   const queryFilters:string=queryString.stringify(searchParams);
-  console.log(queryFilters)
-    const { isLoading:isEpisodesLoading, isError:isEpisodesError, data:episodeData,error:episodesError } = useQuery({
+    const { isLoading:isEpisodesLoading, isError:isEpisodesError, 
+      data:episodeData,error:episodesError } = useQuery({
         queryKey: ['episodes',page,nameFilter,episodeFilter],
-        queryFn:()=> fetchEpisodes(queryFilters),
+        queryFn:()=> fetchEpisodes(queryFilters)
       });
       useEffect(()=>{
         setPage(1)
-      },[nameFilter,episodeFilter])
+      },[nameFilter,episodeFilter]);
 
+      const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value)
+      };
       useEffect(()=>{
         axios.get("https://rickandmortyapi.com/api/episode")
         .then(({data})=>{
@@ -87,8 +91,8 @@ function Episodes() {
     <div>
       <Navigate to={`/episodes/?${queryFilters}`} />
       <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8">
-        <ReactSelectFilter options={reactSelectNamesOption} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
-        <ReactSelectFilter options={reactSelectEpisodesOption} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
+        <ReactSelectFilter placeHolder="search name..." value={nameFilter} options={reactSelectNamesOption} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
+        <ReactSelectFilter placeHolder="search episode..." value={episodeFilter} options={reactSelectEpisodesOption} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
       </div>
     <div className="flex flex-wrap justify-center gap-4">
         {episodeData && episodeCharactersData &&  episodeData.data.results.map((item:IEpisode)=>(
@@ -96,6 +100,9 @@ function Episodes() {
         ))}
         
     </div>
+    <div className='flex justify-center items-center mt-16'>
+    <Pagination color="primary" MuiPaginationItem-textSecondary count={episodeData.data.info.pages} page={page} onChange={handleChange} />
+      </div>
     </div>
   )
 }

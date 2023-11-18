@@ -29,7 +29,7 @@ function Characters() {
   const [name,setName]=useState<string>("");
   const [statusFilter,setStatusFilter]=useState<string>(initialStatus);
   const [genderFilter,setGenderFilter]=useState<string>(initialGender);
-  const [reactSelectOption,setReactSelectOption]=useState<IReactSelectOption[]>([])
+  const [reactSelectOption,setReactSelectOption]=useState<OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>>([])
   //!this useEffect handle the change of all pages when change the status and gender state
   //!and setPages to 1 for pretend the error
 useEffect(()=>{
@@ -85,7 +85,7 @@ const chnageReaceSelectHandler=(e:unknown)=>{
 
 return (
     <div>
-      <FilterCharacter 
+      <FilterCharacter value={name}
       options={reactSelectOption} chnageReaceSelectHandler={chnageReaceSelectHandler}
       genderFilter={genderFilter} setGenderFilter={setGenderFilter} 
       statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
@@ -121,6 +121,7 @@ import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import FilterCharacter from '../components/Layout/FilterCharacter';
 import Loader from '../components/Loader';
+import { GroupBase, OptionsOrGroups } from 'react-select';
 
 
 interface IProps{

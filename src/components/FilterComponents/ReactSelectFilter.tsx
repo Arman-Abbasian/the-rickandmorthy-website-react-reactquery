@@ -1,24 +1,27 @@
 import makeAnimated from "react-select/animated";
-import Select from "react-select";
+import Select, { GroupBase, OptionsOrGroups } from "react-select";
 
 export interface IReactSelectOption{
     label:string;
     value:string;
 }
 interface IReactSelectProps{
-    options:IReactSelectOption[];
+  value:string,
+    options: OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>;
+    placeHolder:string;
     chnageReaceSelectHandler:(e:unknown)=>void
 }
-function ReactSelectFilter({options,chnageReaceSelectHandler,}:IReactSelectProps) {
+function ReactSelectFilter({options,chnageReaceSelectHandler,value,placeHolder}:IReactSelectProps) {
   const animatedComponents = makeAnimated();
   return (
     <div className="flex-1">
-        <Select options={options} 
+        <Select 
+        options={options} 
+        value={value}
         onChange={chnageReaceSelectHandler} 
-        placeholder="select a name ..."
+        placeholder={placeHolder}
         isSearchable
         components={animatedComponents}
-        className="w-full"
         styles={{
           control: (baseStyles,state) => ({
             ...baseStyles,
