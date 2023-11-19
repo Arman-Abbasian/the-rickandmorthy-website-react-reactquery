@@ -1,22 +1,16 @@
-import {useQuery} from '@tanstack/react-query'
 import Pagination from '@mui/material/Pagination';
 import queryString from 'query-string'
 import { Link, Navigate } from "react-router-dom";
 import {toast} from 'react-hot-toast'
 import  { IReactSelectOption } from '../components/FilterComponents/ReactSelectFilter';
-import { AxiosError } from 'axios' 
-
+import { AxiosError } from 'axios' ;
+import {useCharacters} from '../fetchApi/fetchCharacter';
 
 interface ISearchParams{
   page:number;
   name?:string;
   status?:string;
   gender?:string;
-}
-
-const fetchCharacters=async(queryFilters:string)=>{
-  const data=await axios.get(`https://rickandmortyapi.com/api/character?${queryFilters}`)
-  return data
 }
 
 function Characters() {
@@ -35,7 +29,6 @@ function Characters() {
 useEffect(()=>{
   setPage(1)
 },[name,statusFilter,genderFilter])
-const ref=useRef([] as IReactSelectOption[])
 
 //!store the changes of statusFilter & genderFilter states in localStorage
   if(statusFilter){
@@ -54,11 +47,8 @@ const ref=useRef([] as IReactSelectOption[])
   //! quryFilters is all the quryString that we want to stick to the url
   const queryFilters:string=queryString.stringify(searchParams);
   
-  //! useQuery function
-  const { isLoading, isError, data,error:charactersError } = useQuery({
-    queryKey: ['characters',page,name,statusFilter,genderFilter],
-    queryFn:()=> fetchCharacters(queryFilters),
-  });
+  //! useQuery function for characters
+  const { isLoading, isError, data,error:charactersError } = useCharacters(page,name,statusFilter,genderFilter,queryFilters)
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
@@ -72,12 +62,6 @@ const ref=useRef([] as IReactSelectOption[])
     })
     .catch(err=>toast.error(err.data.message))
   },[])
-
-  if(data)
-{
-  const characters:ICharacter[]=data.data.results;
-  ref.current=(characters.map(item=>({label:item.name,value:item.name})))
-}
 
 const chnageReaceSelectHandler=(e:unknown)=>{
  setName(( e as IReactSelectOption).value)
@@ -113,15 +97,21 @@ return (
 export default Characters
 
 
+
+
+
+
+
 //! one character item
 import { FcBusinesswoman, FcBusinessman } from "react-icons/fc";
 import { AiOutlineEye } from "react-icons/ai";
 import { ICharacter } from "../generalTypes";
 import axios from 'axios'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import FilterCharacter from '../components/Layout/FilterCharacter';
 import Loader from '../components/Loader';
 import { GroupBase, OptionsOrGroups } from 'react-select';
+
 
 
 interface IProps{

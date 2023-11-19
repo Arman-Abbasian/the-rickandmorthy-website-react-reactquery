@@ -1,6 +1,4 @@
-import axios from "axios";
 import { useParams } from "react-router-dom";
-import {useQuery} from '@tanstack/react-query'
 import Loader from "../components/Loader";
 import toast from "react-hot-toast";
 import { ICharacter, IEpisode } from "../generalTypes";
@@ -8,16 +6,6 @@ import { HiOutlineFilm } from "react-icons/hi";
 import { BsArrowDownCircle } from "react-icons/bs";
 import { AxiosError } from 'axios' 
 
-
-const fetchCharacter=async(paramId:string)=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/character/${paramId}`)
-    return data
-  }
-  const fetchCharacterEpisodes=async(episodes:string[])=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/episode/${episodes}`)
-    return data
-  }
-  
 
 function CharacterDetail() {
   const [sortEpisode,setSortEpisode]=useState<boolean>(true)
@@ -27,12 +15,9 @@ function CharacterDetail() {
       console.log("first")
       setSortEpisode((prev)=>!prev)
     }
-        //! useQuery function
-        const { isLoading, isError, data,error:chracterQueryError } = useQuery({
-            queryKey: ['characters',paramId],
-            queryFn:()=> fetchCharacter(paramId!),
-          });
-
+    //! useQuery function to get one character
+    const { isLoading, isError,data,error:chracterQueryError } = useCharacter(paramId as string)
+    //! get all the episode that a character palyed and push it in to the episodesArray variable
       let episodesArray:string[]=[];
       const episodes=data?.data?.episode;
       if(Array.isArray(episodes)){
@@ -42,11 +27,9 @@ function CharacterDetail() {
       const item=episodes?.split("/").at(-1)
       episodes?.push(item)
     }
-          const { data:charachterEpisodeData} = useQuery({
-            queryKey: ['characterEpisodes',episodesArray],
-            queryFn:()=> fetchCharacterEpisodes(episodesArray),
-            enabled:episodesArray.length>0
-          });
+    //! useQuery function to get all episodes of a character
+          const { data:charachterEpisodeData} =useCharacterEpisodes(episodesArray)
+          //! sort the episodes of a character based on date
           let sortedEpisodes:IEpisode[]=[];
           if(charachterEpisodeData){
             if(sortEpisode){
@@ -55,7 +38,6 @@ function CharacterDetail() {
           }else{
             sortedEpisodes= [charachterEpisodeData.data].flat().sort((a,b)=>+new Date(a.created) - +new Date(b.created))
           }
-          console.log(sortedEpisodes)
         }
         
 
@@ -85,9 +67,17 @@ function CharacterDetail() {
 export default CharacterDetail;
 
 
+
+
+
+
+
+
+
 import { FcBusinesswoman, FcBusinessman } from "react-icons/fc";
 import { CiLocationOn ,  } from "react-icons/ci";
 import { ReactNode, useState } from "react";
+import { useCharacter, useCharacterEpisodes } from "../fetchApi/fetchCharacter";
 interface ICharacterDetailMainProps{
     character:ICharacter;
 }
