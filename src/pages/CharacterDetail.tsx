@@ -54,7 +54,7 @@ function CharacterDetail() {
           <div className="flex flex-col gap-2">
           {
           sortedEpisodes.map((item:IEpisode,index:number)=>(
-            <CharacterDetailEpisodes rowNumber={String(index+1).padStart(2,"0")} episode={item} />
+            <CharacterDetailEpisodes key={item.id} rowNumber={String(index+1).padStart(2,"0")} episode={item} />
             ))
           }
           </div>

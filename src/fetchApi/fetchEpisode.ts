@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios"
+import api from "../utils/axiosUtils";
 
 //!Qeury function for get episodes
 const fetchEpisodes=async(queryFilters:string)=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/episode?${queryFilters}`)
+    const data=await api.get(`episode?${queryFilters}`)
     return data
   }
 
@@ -16,7 +17,7 @@ const fetchEpisodes=async(queryFilters:string)=>{
 
 //!Qeury function for get characters of a episode
 const fetchEpisodeCharacters=async(characters:string[])=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/character/${characters}`)
+    const data=await api.get(`character/${characters}`)
     return data
   }
 

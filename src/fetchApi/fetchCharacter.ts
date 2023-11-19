@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios"
+import api from "../utils/axiosUtils";
 
 //!Qeury function for get characters
 const fetchCharacters=async(queryFilters:string)=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/character?${queryFilters}`)
+    const data=await api.get(`character?${queryFilters}`)
     return data
   }
 
@@ -11,13 +11,17 @@ const fetchCharacters=async(queryFilters:string)=>{
    return  useQuery({
     queryKey: ['characters',page,nameFilter,statusFilter,genderFilter],
     queryFn:()=> fetchCharacters(queryFilters),
+    refetchOnMount:true,
+    refetchOnReconnect:true,
+    refetchOnWindowFocus:true,
+    
   });
 }
 
 //!Qeury function for get one character
 
 const fetchCharacter=async(paramId:string)=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/character/${paramId}`)
+    const data=await api.get(`character/${paramId}`)
     return data
   }
 
@@ -28,10 +32,9 @@ export const useCharacter=(paramId:string)=>{
   });
 }
 
-
 //!Qeury function for get one epidoses of a character
 const fetchCharacterEpisodes=async(episodes:string[])=>{
-  const data=await axios.get(`https://rickandmortyapi.com/api/episode/${episodes}`)
+  const data=await api.get(`/episode/${episodes}`)
   return data
 }
 export const useCharacterEpisodes=(episodesArray:string[])=>{

@@ -5,6 +5,7 @@ import {toast} from 'react-hot-toast'
 import  { IReactSelectOption } from '../components/FilterComponents/ReactSelectFilter';
 import { AxiosError } from 'axios' ;
 import {useCharacters} from '../fetchApi/fetchCharacter';
+import api from "../utils/axiosUtils";
 
 interface ISearchParams{
   page:number;
@@ -48,14 +49,14 @@ useEffect(()=>{
   const queryFilters:string=queryString.stringify(searchParams);
   
   //! useQuery function for characters
-  const { isLoading, isError, data,error:charactersError } = useCharacters(page,name,statusFilter,genderFilter,queryFilters)
-
+  const { isLoading, isError, data,error:charactersError,isFetching } = useCharacters(page,name,statusFilter,genderFilter,queryFilters)
+console.log(isFetching,isLoading)
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   };
 
   useEffect(()=>{
-    axios.get("https://rickandmortyapi.com/api/character")
+    api.get("character")
     .then(({data})=>{
       const characters:ICharacter[]=data.results
       setReactSelectOption(characters.map(item=>({label:item.name,value:item.name}))) 
@@ -79,7 +80,7 @@ return (
       <Navigate to={`/characters/?${queryFilters}`} />
     <div className="flex flex-wrap justify-center gap-4">
       {data.data.results.map((item:ICharacter)=>{
-        return <Character character={item} /> 
+        return <Character key={item.id} character={item} /> 
       })}
       </div>
       <div className='flex justify-center items-center mt-16'>
@@ -106,7 +107,6 @@ export default Characters
 import { FcBusinesswoman, FcBusinessman } from "react-icons/fc";
 import { AiOutlineEye } from "react-icons/ai";
 import { ICharacter } from "../generalTypes";
-import axios from 'axios'
 import { useEffect, useState } from 'react'
 import FilterCharacter from '../components/Layout/FilterCharacter';
 import Loader from '../components/Loader';
