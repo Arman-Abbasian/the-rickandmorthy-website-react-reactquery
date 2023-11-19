@@ -3,7 +3,7 @@ import api from "../utils/axiosUtils";
 
 //!Qeury function for get characters
 const fetchCharacters=async(queryFilters:string)=>{
-    const data=await api.get(`character?${queryFilters}`)
+    const data=await api.get(`/character?${queryFilters}`)
     return data
   }
 

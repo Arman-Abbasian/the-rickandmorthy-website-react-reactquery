@@ -7,6 +7,7 @@ import { AxiosError } from 'axios' ;
 import {useCharacters} from '../fetchApi/fetchCharacter';
 import api from "../utils/axiosUtils";
 
+
 interface ISearchParams{
   page:number;
   name?:string;
@@ -15,6 +16,7 @@ interface ISearchParams{
 }
 
 function Characters() {
+
   //! initial filter query string =>is used when user back to website after a while
   const initialStatus:string= localStorage.getItem("statusFilter") ? localStorage.getItem("statusFilter")! :"";
   const initialGender:string= localStorage.getItem("genderFilter") ? localStorage.getItem("genderFilter")! :"";
@@ -24,7 +26,7 @@ function Characters() {
   const [name,setName]=useState<string>("");
   const [statusFilter,setStatusFilter]=useState<string>(initialStatus);
   const [genderFilter,setGenderFilter]=useState<string>(initialGender);
-  const [reactSelectOption,setReactSelectOption]=useState<OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>>([])
+  const [reactSelectOption,setReactSelectOption]=useState<OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>>([])
   //!this useEffect handle the change of all pages when change the status and gender state
   //!and setPages to 1 for pretend the error
 useEffect(()=>{
@@ -49,8 +51,8 @@ useEffect(()=>{
   const queryFilters:string=queryString.stringify(searchParams);
   
   //! useQuery function for characters
-  const { isLoading, isError, data,error:charactersError,isFetching } = useCharacters(page,name,statusFilter,genderFilter,queryFilters)
-console.log(isFetching,isLoading)
+  const { isLoading, isError, data,error:charactersError } = useCharacters(page,name,statusFilter,genderFilter,queryFilters)
+
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)
   };
@@ -78,11 +80,14 @@ return (
       :isError && charactersError instanceof AxiosError ? <div>{toast.error(charactersError?.response?.data.error)}</div> 
       :data && <div>
       <Navigate to={`/characters/?${queryFilters}`} />
-    <div className="flex flex-wrap justify-center gap-4">
+    <div className='container mx-auto max-w-5xl'>
+    <div className="flex flex-wrap justify-center lg:justify-start gap-4">
       {data.data.results.map((item:ICharacter)=>{
         return <Character key={item.id} character={item} /> 
       })}
       </div>
+    </div>
+
       <div className='flex justify-center items-center mt-16'>
     <Pagination color="primary" MuiPaginationItem-textSecondary count={data.data.info.pages} page={page} onChange={handleChange} />
       </div>
@@ -135,7 +140,8 @@ function Character({character}:IProps) {
           <p className={`text-ellipsis overflow-hidden`}>{character.name.length>20 ? character.name.substring(0,20)+"...":character.name}</p>
         </div>
         <div className='flex gap-1 items-center'>
-          <span className="w-2 h-2 rounded-full bg-green-300"></span>
+          <span className={`w-2 h-2 rounded-full 
+          ${character.status==="Alive"?"bg-green-400":character.status==="Dead"?"bg-red-400":"bg-yellow-400"}`}></span>
           <p>{character.status}-</p>
           <p>{character.species}</p>
         </div>

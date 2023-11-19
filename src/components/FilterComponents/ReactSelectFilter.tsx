@@ -7,7 +7,7 @@ export interface IReactSelectOption{
 }
 interface IReactSelectProps{
   value:string,
-    options: OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>;
+    options: OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>;
     placeHolder:string;
     chnageReaceSelectHandler:(e:unknown)=>void
 }

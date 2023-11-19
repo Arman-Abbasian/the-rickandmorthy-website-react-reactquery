@@ -8,7 +8,7 @@ interface IFilterCharacterProps{
   setStatusFilter:React.Dispatch<React.SetStateAction<string>>;
   genderFilter:string;
   setGenderFilter:React.Dispatch<React.SetStateAction<string>>;
-  options:OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>;
+  options:OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>;
   value:string,
   chnageReaceSelectHandler:(e:unknown)=>void
 }

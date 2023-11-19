@@ -1,4 +1,3 @@
-import axios from "axios";
 import { ICharacter, IEpisode } from "../generalTypes";
 import { AxiosError } from 'axios' 
 import toast from "react-hot-toast";
@@ -8,8 +7,8 @@ import ReactSelectFilter, { IReactSelectOption } from "../components/FilterCompo
 import queryString from "query-string";
 import { Navigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
-import { GroupBase, OptionsOrGroups } from "react-select";
 import { useEpisodeCharacters, useEpisodes } from "../fetchApi/fetchEpisode";
+import { episodeEpisodesList, episodeNamesList } from "../api";
 
 interface ISearchParams{
   page:number;
@@ -21,8 +20,6 @@ function Episodes() {
   const [page,setPage]=useState<number>(1);
   const [nameFilter,setNameFilter]=useState<string>("");
   const [episodeFilter,setEpisodeFilter]=useState<string>("");
-  const [reactSelectNamesOption,setReactSelectNamesOption]=useState<OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>>([])
-  const [reactSelectEpisodesOption,setReactSelectEpisodesOption]=useState<OptionsOrGroups<IReactSelectOption[], GroupBase<IReactSelectOption[]>>>([])
 
   const searchParams:ISearchParams={page:page};
   if(nameFilter) searchParams.name=nameFilter;
@@ -38,15 +35,6 @@ function Episodes() {
       const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value)
       };
-      useEffect(()=>{
-        axios.get("https://rickandmortyapi.com/api/episode")
-        .then(({data})=>{
-          const episodes:IEpisode[]=data.results
-          setReactSelectNamesOption(episodes.map(item=>({label:item.name,value:item.name}))) 
-          setReactSelectEpisodesOption(episodes.map(item=>({label:item.episode,value:item.episode})))
-        })
-        .catch(err=>toast.error(err.data.message))
-      },[])
 
       let charactersArray:string[]=[];
       const characters=episodeData?.data?.characters;
@@ -73,14 +61,16 @@ function Episodes() {
     <div>
       <Navigate to={`/episodes/?${queryFilters}`} />
       <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8">
-        <ReactSelectFilter placeHolder="search name..." value={nameFilter} options={reactSelectNamesOption} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
-        <ReactSelectFilter placeHolder="search episode..." value={episodeFilter} options={reactSelectEpisodesOption} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
+        <ReactSelectFilter placeHolder="search name..." value={nameFilter} options={episodeEpisodesList} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
+        <ReactSelectFilter placeHolder="search episode..." value={episodeFilter} options={episodeNamesList} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
       </div>
-    <div className="flex flex-wrap justify-center gap-4">
+      <div className='container mx-auto max-w-6xl'>
+    <div className="flex flex-wrap  justify-center lg:justify-start gap-4">
         {episodeData && episodeCharactersData &&  episodeData.data.results.map((item:IEpisode)=>(
             <Episode episode={item} characters={episodeCharactersData.data.results}   />
         ))}
         
+    </div>
     </div>
     <div className='flex justify-center items-center mt-16'>
     <Pagination color="primary" MuiPaginationItem-textSecondary count={episodeData.data.info.pages} page={page} onChange={handleChange} />

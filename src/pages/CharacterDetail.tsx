@@ -100,7 +100,8 @@ function CharacterDetailMain({character}:ICharacterDetailMainProps) {
           <p className={`text-ellipsis overflow-hidden`}>{character.name.length>20 ? character.name.substring(0,20)+"...":character.name}</p>
         </p>
         <div className="flex gap-1 items-center">
-          <span className="w-2 h-2 rounded-full bg-green-300"></span>
+          <span className={`w-2 h-2 rounded-full 
+          ${character.status==="Alive"?"bg-green-400":character.status==="Dead"?"bg-red-400":"bg-yellow-400"}`}></span>
           <p>{character.status}-</p>
           <p>{character.species}</p>
         </div>
