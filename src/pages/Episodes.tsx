@@ -1,6 +1,5 @@
 import axios from "axios";
 import { ICharacter, IEpisode } from "../generalTypes";
-import {useQuery} from '@tanstack/react-query';
 import { AxiosError } from 'axios' 
 import toast from "react-hot-toast";
 import Loader from "../components/Loader";
@@ -10,23 +9,13 @@ import queryString from "query-string";
 import { Navigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import { GroupBase, OptionsOrGroups } from "react-select";
-
+import { useEpisodeCharacters, useEpisodes } from "../fetchApi/fetchEpisode";
 
 interface ISearchParams{
   page:number;
   name?:string;
   episode?:string
 }
-const fetchEpisodes=async(queryFilters:string)=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/episode?${queryFilters}`)
-    return data
-  }
-  const fetchEpisodeCharacters=async(characters:string[])=>{
-    const data=await axios.get(`https://rickandmortyapi.com/api/character/${characters}`)
-    return data
-  }
-
-  
 
 function Episodes() {
   const [page,setPage]=useState<number>(1);
@@ -39,11 +28,9 @@ function Episodes() {
   if(nameFilter) searchParams.name=nameFilter;
   if(episodeFilter) searchParams.episode=episodeFilter;
   const queryFilters:string=queryString.stringify(searchParams);
+  //! useQuery to get all episodes
     const { isLoading:isEpisodesLoading, isError:isEpisodesError, 
-      data:episodeData,error:episodesError } = useQuery({
-        queryKey: ['episodes',page,nameFilter,episodeFilter],
-        queryFn:()=> fetchEpisodes(queryFilters)
-      });
+      data:episodeData,error:episodesError } = useEpisodes(page,nameFilter,episodeFilter,queryFilters)
       useEffect(()=>{
         setPage(1)
       },[nameFilter,episodeFilter]);
@@ -55,7 +42,6 @@ function Episodes() {
         axios.get("https://rickandmortyapi.com/api/episode")
         .then(({data})=>{
           const episodes:IEpisode[]=data.results
-          console.log(episodes)
           setReactSelectNamesOption(episodes.map(item=>({label:item.name,value:item.name}))) 
           setReactSelectEpisodesOption(episodes.map(item=>({label:item.episode,value:item.episode})))
         })
@@ -71,11 +57,7 @@ function Episodes() {
       const item=characters?.split("/").at(-1)
       charactersArray.push(item)
     }
-          const { data:episodeCharactersData} = useQuery({
-            queryKey: ['episodeCharacters',charactersArray],
-            queryFn:()=> fetchEpisodeCharacters(charactersArray),
-            enabled:charactersArray.length>0
-          });
+          const { data:episodeCharactersData} = useEpisodeCharacters(charactersArray)
           const chnageReaceSelectNamesHandler=(e:unknown)=>{
             setNameFilter(( e as IReactSelectOption).value)
             setEpisodeFilter("")
@@ -112,6 +94,8 @@ export default Episodes;
 
 
 
+
+//! one episode component
 interface IEpisodeProps{
     episode:IEpisode;
     characters:ICharacter[];
