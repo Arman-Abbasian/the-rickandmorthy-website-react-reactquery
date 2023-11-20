@@ -17,8 +17,8 @@ interface ISearchParams{
 }
 
 const loadPageWithAnimation={
-  initial:{y:'-100vw',opacity:0},
-  animate:{y:'0vw',opacity:1,transition:{duration:1.5}}
+  initial:{x:'-100vw',opacity:0},
+  animate:{x:'0vw',opacity:1,transition:{duration:1.5}}
 }
 
 function Characters() {
