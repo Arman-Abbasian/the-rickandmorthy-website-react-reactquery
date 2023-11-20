@@ -9,11 +9,16 @@ import { Navigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import { useEpisodeCharacters, useEpisodes } from "../fetchApi/fetchEpisode";
 import { episodeEpisodesList, episodeNamesList } from "../api";
+import {motion} from 'framer-motion'
 
 interface ISearchParams{
   page:number;
   name?:string;
   episode?:string
+}
+const loadPageWithAnimation={
+  initial:{y:'-100vw',opacity:0},
+  animate:{y:'0vw',opacity:1,transition:{duration:1.5}}
 }
 
 function Episodes() {
@@ -58,7 +63,7 @@ function Episodes() {
       if(isEpisodesError && episodesError instanceof AxiosError) return <div>{toast.error(episodesError?.response?.data?.error)}</div>
       if(episodeData)
       return (
-    <div>
+    <motion.div variants={loadPageWithAnimation} initial="initial" animate="animate">
       <Navigate to={`/episodes/?${queryFilters}`} />
       <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8">
         <ReactSelectFilter placeHolder="search name..." value={nameFilter} options={episodeEpisodesList} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
@@ -75,7 +80,7 @@ function Episodes() {
     <div className='flex justify-center items-center mt-16'>
     <Pagination color="primary" MuiPaginationItem-textSecondary count={episodeData.data.info.pages} page={page} onChange={handleChange} />
       </div>
-    </div>
+    </motion.div>
   )
 }
 
@@ -91,10 +96,13 @@ interface IEpisodeProps{
     characters:ICharacter[];
 }
 
-
+const hoverCharacter={
+  scale:1.13,
+  transition:{duration:0.5,type:'spring',stiffness:200}
+}
 function Episode({episode,characters}:IEpisodeProps) {
   return (
-    <div className='flex h-36 w-[340px] rounded-md overflow-hidden text-xs bg-color-secondary'>
+    <motion.div whileHover={hoverCharacter} className='flex h-36 w-[340px] rounded-md overflow-hidden text-xs bg-color-secondary'>
       {/*! image section */}
       <div>
         <img className='w-full h-full object-cover' src={'/images/episodePoster.png'} alt={episode.episode} />
@@ -117,6 +125,6 @@ function Episode({episode,characters}:IEpisodeProps) {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }

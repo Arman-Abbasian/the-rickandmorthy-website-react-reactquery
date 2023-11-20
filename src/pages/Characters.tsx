@@ -6,6 +6,7 @@ import  { IReactSelectOption } from '../components/FilterComponents/ReactSelectF
 import { AxiosError } from 'axios' ;
 import {useCharacters} from '../fetchApi/fetchCharacter';
 import api from "../utils/axiosUtils";
+import {motion} from 'framer-motion'
 
 
 interface ISearchParams{
@@ -13,6 +14,11 @@ interface ISearchParams{
   name?:string;
   status?:string;
   gender?:string;
+}
+
+const loadPageWithAnimation={
+  initial:{y:'-100vw',opacity:0},
+  animate:{y:'0vw',opacity:1,transition:{duration:1.5}}
 }
 
 function Characters() {
@@ -71,7 +77,7 @@ const chnageReaceSelectHandler=(e:unknown)=>{
 }
 
 return (
-    <div>
+    <motion.div variants={loadPageWithAnimation} initial="initial" animate="animate">
       <FilterCharacter value={name}
       options={reactSelectOption} chnageReaceSelectHandler={chnageReaceSelectHandler}
       genderFilter={genderFilter} setGenderFilter={setGenderFilter} 
@@ -96,7 +102,7 @@ return (
     }
      
       
-      </div>
+      </motion.div>
   )
 }
 
@@ -122,9 +128,13 @@ import { GroupBase, OptionsOrGroups } from 'react-select';
 interface IProps{
   character:ICharacter
 }
+const hoverCharacter={
+  scale:1.13,
+  transition:{duration:0.5,type:'spring',stiffness:200}
+}
 function Character({character}:IProps) {
   return (
-    <div className='flex h-20 w-80 rounded-md overflow-hidden text-xs bg-color-secondary'>
+    <motion.div whileHover={hoverCharacter} className='flex h-20 w-80 rounded-md overflow-hidden text-xs bg-color-secondary'>
       {/*! image section */}
       <div>
         <img className='w-full h-full object-cover' src={character.image} alt={character.name} />
@@ -148,6 +158,6 @@ function Character({character}:IProps) {
         </div>
         <Link to={`/characters/${(character.id.toString())}`}><AiOutlineEye className="mobile-icon hover:cursor-pointer"/></Link>
       </div>
-    </div>
+    </motion.div>
   )
 }
