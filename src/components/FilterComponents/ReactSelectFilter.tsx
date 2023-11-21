@@ -17,9 +17,9 @@ function ReactSelectFilter({options,chnageReaceSelectHandler,value,placeHolder}:
     <div className="flex-1">
         <Select 
         options={options} 
+        placeholder={placeHolder}
         value={value}
         onChange={chnageReaceSelectHandler} 
-        placeholder={placeHolder}
         isSearchable
         components={animatedComponents}
         styles={{

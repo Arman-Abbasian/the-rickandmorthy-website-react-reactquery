@@ -61,15 +61,24 @@ interface IProps{
   to:string;
   text:string
 }
+const showLogoOrText={
+  initial:{
+    x:"-100vw"
+  },
+  animate:{
+    x:0,
+    transition:{duration:0.01}
+  },
+}
 
 function SidebarItem({children,to,text}:IProps) {
   const [showText,setShowText]=useState(false)
   return (
     <AnimatePresence>
     <motion.li className="flex justify-center" onMouseOver={()=>setShowText(true)} onMouseOut={()=>setShowText(false)} variants={listItem}>
-                    <NavLink className='hover:bg-color-secondary transition-all duration-500 cursor-pointer w-full flex justify-center p-4' to={to}>
-                      <motion.div className={`${showText?'hidden':'block'}`}>{children}</motion.div> 
-                      <motion.p  className={`${showText?'block':'hidden'} text-xs transition-all duration-500`}>{text}</motion.p>
+                    <NavLink key={+showText} className='hover:bg-color-secondary transition-all duration-500 cursor-pointer w-full flex justify-center p-4' to={to}>
+                      <motion.div variants={showLogoOrText} initial="initial" animate="animate"  className={`${showText?'hidden':'block'}`}>{children}</motion.div> 
+                      <motion.p  variants={showLogoOrText} initial="initial" animate="animate" className={`${showText?'block':'hidden'} text-xs transition-all duration-500`}>{text}</motion.p>
                       </NavLink>
                 </motion.li>
       </AnimatePresence>

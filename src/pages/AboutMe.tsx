@@ -9,7 +9,6 @@ const loadPageWithAnimation={
   initial:{opacity:0},
   animate:{opacity:1,transition:{duration:2}}
 }
-
 const listinProrityShowVariant={
   initial:{
     x:'100vw',
@@ -51,7 +50,6 @@ const textSectionVariant={
     transition:{duration:1}
   }
 }
-
 function AboutMe() {
   return (
     <motion.div variants={loadPageWithAnimation} initial="initial" animate="animate" className="container max-w-xl mx-auto flex flex-col gap-6 mb-8 shadow-sm drop-shadow-sm">

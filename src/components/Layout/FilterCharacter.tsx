@@ -39,7 +39,7 @@ function FilterCharacter({genderFilter,setGenderFilter,setStatusFilter,statusFil
   }
   return (
       <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8">
-      <ReactSelectFilter chnageReaceSelectHandler={chnageReaceSelectHandler} options={options} value={value} placeHolder="search name..." />
+      <ReactSelectFilter chnageReaceSelectHandler={chnageReaceSelectHandler} options={options} value={value} placeHolder={"search name..."} />
         <CheckBoxComponent filterState={statusFilter} changeHandler={changeStatusHandler} title="status" arr={status} />
         <CheckBoxComponent filterState={genderFilter} changeHandler={changeGenderHandler} title="gender" arr={gender} />
         </div>
