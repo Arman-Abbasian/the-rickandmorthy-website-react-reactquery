@@ -413,3 +413,805 @@ export const episodeNamesList:OptionsOrGroups<IReactSelectOption, GroupBase<IRea
         value: "Rickmurai Jack"
       }
 ]
+export const characterNamesList:OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>=[
+  {
+    label: "Rick Sanchez",
+    value: "Rick Sanchez"
+  },
+  {
+    label: "Morty Smith",
+    value: "Morty Smith"
+  },
+  {
+    label: "Summer Smith",
+    value: "Summer Smith"
+  },
+  {
+    label: "Beth Smith",
+    value: "Beth Smith"
+  },
+  {
+    label: "Jerry Smith",
+    value: "Jerry Smith"
+  },
+  {
+    label: "Abadango Cluster Princess",
+    value: "Abadango Cluster Princess"
+  },
+  {
+    label: "Abradolf Lincler",
+    value: "Abradolf Lincler"
+  },
+  {
+    label: "Adjudicator Rick",
+    value: "Adjudicator Rick"
+  },
+  {
+    label: "Agency Director",
+    value: "Agency Director"
+  },
+  {
+    label: "Alan Rails",
+    value: "Alan Rails"
+  },
+  {
+    label: "Albert Einstein",
+    value: "Albert Einstein"
+  },
+  {
+    label: "Alexander",
+    value: "Alexander"
+  },
+  {
+    label: "Alien Googah",
+    value: "Alien Googah"
+  },
+  {
+    label: "Alien Morty",
+    value: "Alien Morty"
+  },
+  {
+    label: "Alien Rick",
+    value: "Alien Rick"
+  },
+  {
+    label: "Amish Cyborg",
+    value: "Amish Cyborg"
+  },
+  {
+    label: "Annie",
+    value: "Annie"
+  },
+  {
+    label: "Antenna Morty",
+    value: "Antenna Morty"
+  },
+  {
+    label: "Antenna Rick",
+    value: "Antenna Rick"
+  },
+  {
+    label: "Ants in my Eyes Johnson",
+    value: "Ants in my Eyes Johnson"
+  },
+  {
+    label: "Aqua Morty",
+    value: "Aqua Morty"
+  },
+  {
+    label: "Aqua Rick",
+    value: "Aqua Rick"
+  },
+  {
+    label: "Arcade Alien",
+    value: "Arcade Alien"
+  },
+  {
+    label: "Armagheadon",
+    value: "Armagheadon"
+  },
+  {
+    label: "Armothy",
+    value: "Armothy"
+  },
+  {
+    label: "Arthricia",
+    value: "Arthricia"
+  },
+  {
+    label: "Artist Morty",
+    value: "Artist Morty"
+  },
+  {
+    label: "Attila Starwar",
+    value: "Attila Starwar"
+  },
+  {
+    label: "Baby Legs",
+    value: "Baby Legs"
+  },
+  {
+    label: "Baby Poopybutthole",
+    value: "Baby Poopybutthole"
+  },
+  {
+    label: "Baby Wizard",
+    value: "Baby Wizard"
+  },
+  {
+    label: "Bearded Lady",
+    value: "Bearded Lady"
+  },
+  {
+    label: "Beebo",
+    value: "Beebo"
+  },
+  {
+    label: "Benjamin",
+    value: "Benjamin"
+  },
+  {
+    label: "Bepisian",
+    value: "Bepisian"
+  },
+  {
+    label: "Beta-Seven",
+    value: "Beta-Seven"
+  },
+  {
+    label: "Beth Sanchez",
+    value: "Beth Sanchez"
+  },
+  {
+    label: "Beth Smith",
+    value: "Beth Smith"
+  },
+  {
+    label: "Beth Smith",
+    value: "Beth Smith"
+  },
+  {
+    label: "Beth's Mytholog",
+    value: "Beth's Mytholog"
+  },
+  {
+    label: "Big Boobed Waitress",
+    value: "Big Boobed Waitress"
+  },
+  {
+    label: "Big Head Morty",
+    value: "Big Head Morty"
+  },
+  {
+    label: "Big Morty",
+    value: "Big Morty"
+  },
+  {
+    label: "Body Guard Morty",
+    value: "Body Guard Morty"
+  },
+  {
+    label: "Bill",
+    value: "Bill"
+  },
+  {
+    label: "Bill",
+    value: "Bill"
+  },
+  {
+    label: "Birdperson",
+    value: "Birdperson"
+  },
+  {
+    label: "Black Rick",
+    value: "Black Rick"
+  },
+  {
+    label: "Blamph",
+    value: "Blamph"
+  },
+  {
+    label: "Blim Blam",
+    value: "Blim Blam"
+  },
+  {
+    label: "Blue Diplomat",
+    value: "Blue Diplomat"
+  },
+  {
+    label: "Blue Footprint Guy",
+    value: "Blue Footprint Guy"
+  },
+  {
+    label: "Blue Shirt Morty",
+    value: "Blue Shirt Morty"
+  },
+  {
+    label: "Bobby Moynihan",
+    value: "Bobby Moynihan"
+  },
+  {
+    label: "Boobloosian",
+    value: "Boobloosian"
+  },
+  {
+    label: "Bootleg Portal Chemist Rick",
+    value: "Bootleg Portal Chemist Rick"
+  },
+  {
+    label: "Borpocian",
+    value: "Borpocian"
+  },
+  {
+    label: "Brad",
+    value: "Brad"
+  },
+  {
+    label: "Brad Anderson",
+    value: "Brad Anderson"
+  },
+  {
+    label: "Calypso",
+    value: "Calypso"
+  },
+  {
+    label: "Campaign Manager Morty",
+    value: "Campaign Manager Morty"
+  },
+  {
+    label: "Canklanker Thom",
+    value: "Canklanker Thom"
+  },
+  {
+    label: "Centaur",
+    value: "Centaur"
+  },
+  {
+    label: "Chris",
+    value: "Chris"
+  },
+  {
+    label: "Chris",
+    value: "Chris"
+  },
+  {
+    label: "Coach Feratu (Balik Alistane)",
+    value: "Coach Feratu (Balik Alistane)"
+  },
+  {
+    label: "Collector",
+    value: "Collector"
+  },
+  {
+    label: "Colossus",
+    value: "Colossus"
+  },
+  {
+    label: "Commander Rick",
+    value: "Commander Rick"
+  },
+  {
+    label: "Concerto",
+    value: "Concerto"
+  },
+  {
+    label: "Conroy",
+    value: "Conroy"
+  },
+  {
+    label: "Cool Rick",
+    value: "Cool Rick"
+  },
+  {
+    label: "Cop Morty",
+    value: "Cop Morty"
+  },
+  {
+    label: "Cop Rick",
+    value: "Cop Rick"
+  },
+  {
+    label: "Courier Flap",
+    value: "Courier Flap"
+  },
+  {
+    label: "Cousin Nicky",
+    value: "Cousin Nicky"
+  },
+  {
+    label: "Cowboy Morty",
+    value: "Cowboy Morty"
+  },
+  {
+    label: "Cowboy Rick",
+    value: "Cowboy Rick"
+  },
+  {
+    label: "Crab Spider",
+    value: "Crab Spider"
+  },
+  {
+    label: "Creepy Little Girl",
+    value: "Creepy Little Girl"
+  },
+  {
+    label: "Crocubot",
+    value: "Crocubot"
+  },
+  {
+    label: "Cronenberg Rick",
+    value: "Cronenberg Rick"
+  },
+  {
+    label: "Cronenberg Morty",
+    value: "Cronenberg Morty"
+  },
+  {
+    label: "Cult Leader Morty",
+    value: "Cult Leader Morty"
+  },
+  {
+    label: "Cyclops Morty",
+    value: "Cyclops Morty"
+  },
+  {
+    label: "Cyclops Rick",
+    value: "Cyclops Rick"
+  },
+  {
+    label: "Cynthia",
+    value: "Cynthia"
+  },
+  {
+    label: "Cynthia",
+    value: "Cynthia"
+  },
+  {
+    label: "Dale",
+    value: "Dale"
+  },
+  {
+    label: "Daron Jefferson",
+    value: "Daron Jefferson"
+  },
+  {
+    label: "David Letterman",
+    value: "David Letterman"
+  },
+  {
+    label: "Davin",
+    value: "Davin"
+  },
+  {
+    label: "Diablo Verde",
+    value: "Diablo Verde"
+  },
+  {
+    label: "Diane Sanchez",
+    value: "Diane Sanchez"
+  },
+  {
+    label: "Dipper and Mabel Mortys",
+    value: "Dipper and Mabel Mortys"
+  },
+  {
+    label: "Tuberculosis",
+    value: "Tuberculosis"
+  },
+  {
+    label: "Gonorrhea",
+    value: "Gonorrhea"
+  },
+  {
+    label: "Hepatitis A",
+    value: "Hepatitis A"
+  },
+  {
+    label: "Hepatitis C",
+    value: "Hepatitis C"
+  },
+  {
+    label: "Bubonic Plague",
+    value: "Bubonic Plague"
+  },
+  {
+    label: "E. Coli",
+    value: "E. Coli"
+  },
+  {
+    label: "Donna Gueterman",
+    value: "Donna Gueterman"
+  },
+  {
+    label: "Doofus Rick",
+    value: "Doofus Rick"
+  },
+  {
+    label: "Doom-Nomitron",
+    value: "Doom-Nomitron"
+  },
+  {
+    label: "Dr. Glip-Glop",
+    value: "Dr. Glip-Glop"
+  },
+  {
+    label: "Dr. Schmidt",
+    value: "Dr. Schmidt"
+  },
+  {
+    label: "Dr. Wong",
+    value: "Dr. Wong"
+  },
+  {
+    label: "Dr. Xenon Bloom",
+    value: "Dr. Xenon Bloom"
+  },
+  {
+    label: "Duck With Muscles",
+    value: "Duck With Muscles"
+  },
+  {
+    label: "Eli",
+    value: "Eli"
+  },
+  {
+    label: "Eli's Girlfriend",
+    value: "Eli's Girlfriend"
+  },
+  {
+    label: "Eric McMan",
+    value: "Eric McMan"
+  },
+  {
+    label: "Eric Stoltz Mask Morty",
+    value: "Eric Stoltz Mask Morty"
+  },
+  {
+    label: "Ethan",
+    value: "Ethan"
+  },
+  {
+    label: "Ethan",
+    value: "Ethan"
+  },
+  {
+    label: "Evil Beth Clone",
+    value: "Evil Beth Clone"
+  },
+  {
+    label: "Evil Jerry Clone",
+    value: "Evil Jerry Clone"
+  },
+  {
+    label: "Evil Morty",
+    value: "Evil Morty"
+  },
+  {
+    label: "Evil Rick",
+    value: "Evil Rick"
+  },
+  {
+    label: "Evil Summer Clone",
+    value: "Evil Summer Clone"
+  },
+  {
+    label: "Eyehole Man",
+    value: "Eyehole Man"
+  },
+  {
+    label: "Fart",
+    value: "Fart"
+  },
+  {
+    label: "Fat Morty",
+    value: "Fat Morty"
+  },
+  {
+    label: "Father Bob",
+    value: "Father Bob"
+  },
+  {
+    label: "Flansian",
+    value: "Flansian"
+  },
+  {
+    label: "Fleeb",
+    value: "Fleeb"
+  },
+  {
+    label: "Frank Palicky",
+    value: "Frank Palicky"
+  },
+  {
+    label: "Frankenstein's Monster",
+    value: "Frankenstein's Monster"
+  },
+  {
+    label: "Fulgora",
+    value: "Fulgora"
+  },
+  {
+    label: "Galactic Federation President",
+    value: "Galactic Federation President"
+  },
+  {
+    label: "Gar Gloonch",
+    value: "Gar Gloonch"
+  },
+  {
+    label: "Gar's Mytholog",
+    value: "Gar's Mytholog"
+  },
+  {
+    label: "Garblovian",
+    value: "Garblovian"
+  },
+  {
+    label: "Garmanarnar",
+    value: "Garmanarnar"
+  },
+  {
+    label: "Garment District Rick",
+    value: "Garment District Rick"
+  },
+  {
+    label: "Gazorpazorpfield",
+    value: "Gazorpazorpfield"
+  },
+  {
+    label: "Gene",
+    value: "Gene"
+  },
+  {
+    label: "General Nathan",
+    value: "General Nathan"
+  },
+  {
+    label: "General Store Owner",
+    value: "General Store Owner"
+  },
+  {
+    label: "Genital Washer",
+    value: "Genital Washer"
+  },
+  {
+    label: "Ghost in a Jar",
+    value: "Ghost in a Jar"
+  },
+  {
+    label: "Gibble Snake",
+    value: "Gibble Snake"
+  },
+  {
+    label: "Glasses Morty",
+    value: "Glasses Morty"
+  },
+  {
+    label: "Glenn",
+    value: "Glenn"
+  },
+  {
+    label: "Glenn",
+    value: "Glenn"
+  },
+  {
+    label: "Glexo Slim Slom",
+    value: "Glexo Slim Slom"
+  },
+  {
+    label: "Gobo",
+    value: "Gobo"
+  },
+  {
+    label: "Goddess Beth",
+    value: "Goddess Beth"
+  },
+  {
+    label: "Gordon Lunas",
+    value: "Gordon Lunas"
+  },
+  {
+    label: "Cornvelious Daniel",
+    value: "Cornvelious Daniel"
+  },
+  {
+    label: "Gwendolyn",
+    value: "Gwendolyn"
+  },
+  {
+    label: "Hammerhead Morty",
+    value: "Hammerhead Morty"
+  },
+  {
+    label: "Hamster In Butt",
+    value: "Hamster In Butt"
+  },
+  {
+    label: "Hamurai",
+    value: "Hamurai"
+  },
+  {
+    label: "Harold",
+    value: "Harold"
+  },
+  {
+    label: "Hemorrhage",
+    value: "Hemorrhage"
+  },
+  {
+    label: "Hole in the Wall Where the Men Can See it All",
+    value: "Hole in the Wall Where the Men Can See it All"
+  },
+  {
+    label: "Hookah Alien",
+    value: "Hookah Alien"
+  },
+  {
+    label: "Hunter",
+    value: "Hunter"
+  },
+  {
+    label: "Hunter's Father",
+    value: "Hunter's Father"
+  },
+  {
+    label: "Hydrogen-F",
+    value: "Hydrogen-F"
+  },
+  {
+    label: "Ice-T",
+    value: "Ice-T"
+  },
+  {
+    label: "Ideal Jerry",
+    value: "Ideal Jerry"
+  },
+  {
+    label: "Insurance Rick",
+    value: "Insurance Rick"
+  },
+  {
+    label: "Investigator Rick",
+    value: "Investigator Rick"
+  },
+  {
+    label: "Invisi-trooper",
+    value: "Invisi-trooper"
+  },
+  {
+    label: "Izzy",
+    value: "Izzy"
+  },
+  {
+    label: "Jackie",
+    value: "Jackie"
+  },
+  {
+    label: "Jacob",
+    value: "Jacob"
+  },
+  {
+    label: "Jacqueline",
+    value: "Jacqueline"
+  },
+  {
+    label: "Jaguar",
+    value: "Jaguar"
+  },
+  {
+    label: "Jamey",
+    value: "Jamey"
+  },
+  {
+    label: "Jan-Michael Vincent",
+    value: "Jan-Michael Vincent"
+  },
+  {
+    label: "Jerry 5-126",
+    value: "Jerry 5-126"
+  },
+  {
+    label: "Jerry Smith",
+    value: "Jerry Smith"
+  },
+  {
+    label: "Celebrity Jerry",
+    value: "Celebrity Jerry"
+  },
+  {
+    label: "Jerry Smith",
+    value: "Jerry Smith"
+  },
+  {
+    label: "Jerry's Mytholog",
+    value: "Jerry's Mytholog"
+  },
+  {
+    label: "Jessica",
+    value: "Jessica"
+  },
+  {
+    label: "Jessica",
+    value: "Jessica"
+  },
+  {
+    label: "Hydrogen-F",
+    value: "Hydrogen-F"
+  },
+  {
+    label: "Ice-T",
+    value: "Ice-T"
+  },
+  {
+    label: "Ideal Jerry",
+    value: "Ideal Jerry"
+  },
+  {
+    label: "Insurance Rick",
+    value: "Insurance Rick"
+  },
+  {
+    label: "Investigator Rick",
+    value: "Investigator Rick"
+  },
+  {
+    label: "Invisi-trooper",
+    value: "Invisi-trooper"
+  },
+  {
+    label: "Izzy",
+    value: "Izzy"
+  },
+  {
+    label: "Jackie",
+    value: "Jackie"
+  },
+  {
+    label: "Jacob",
+    value: "Jacob"
+  },
+  {
+    label: "Jacqueline",
+    value: "Jacqueline"
+  },
+  {
+    label: "Jaguar",
+    value: "Jaguar"
+  },
+  {
+    label: "Jamey",
+    value: "Jamey"
+  },
+  {
+    label: "Jan-Michael Vincent",
+    value: "Jan-Michael Vincent"
+  },
+  {
+    label: "Jerry 5-126",
+    value: "Jerry 5-126"
+  },
+  {
+    label: "Jerry Smith",
+    value: "Jerry Smith"
+  },
+  {
+    label: "Celebrity Jerry",
+    value: "Celebrity Jerry"
+  },
+  {
+    label: "Jerry Smith",
+    value: "Jerry Smith"
+  },
+  {
+    label: "Jerry's Mytholog",
+    value: "Jerry's Mytholog"
+  },
+  {
+    label: "Jessica",
+    value: "Jessica"
+  },
+  {
+    label: "Jessica",
+    value: "Jessica"
+  }
+]

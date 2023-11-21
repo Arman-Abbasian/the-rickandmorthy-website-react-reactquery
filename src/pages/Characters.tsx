@@ -32,7 +32,7 @@ function Characters() {
   const [name,setName]=useState<string>("");
   const [statusFilter,setStatusFilter]=useState<string>(initialStatus);
   const [genderFilter,setGenderFilter]=useState<string>(initialGender);
-  const [reactSelectOption,setReactSelectOption]=useState<OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>>([])
+  //const [reactSelectOption,setReactSelectOption]=useState<OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>>([]);
   //!this useEffect handle the change of all pages when change the status and gender state
   //!and setPages to 1 for pretend the error
 useEffect(()=>{
@@ -63,25 +63,38 @@ useEffect(()=>{
     setPage(value)
   };
 
-  useEffect(()=>{
-    api.get("character")
-    .then(({data})=>{
-      const characters:ICharacter[]=data.results
-      setReactSelectOption(characters.map(item=>({label:item.name,value:item.name}))) 
-    })
-  },[])
+  //!-------------------
+useEffect(()=>{
+  api.get("character?page=10")
+  .then(({data})=>{
+    const names=(data?.results.map((item:ICharacter)=>{
+      return {label:item.name,value:item.name}
+    }))
+    console.log(names)
+  }).catch(err=>console.log(err))
+},[])
+
+
+  //!-------------------
+  // useEffect(()=>{
+  //   api.get("character")
+  //   .then(({data})=>{
+  //     const characters:ICharacter[]=data.results
+  //     setReactSelectOption(characters.map(item=>({label:item.name,value:item.name}))) 
+  //   })
+  // },[])
 
 const chnageReaceSelectHandler=(e:unknown)=>{
  setName(( e as IReactSelectOption).value)
 }
 
 return (
-    <motion.div variants={loadPageWithAnimation} initial="initial" animate="animate">
+    <motion.div  variants={loadPageWithAnimation} initial="initial" animate="animate">
       <FilterCharacter value={name}
-      options={reactSelectOption} chnageReaceSelectHandler={chnageReaceSelectHandler}
+      options={characterNamesList} chnageReaceSelectHandler={chnageReaceSelectHandler}
       genderFilter={genderFilter} setGenderFilter={setGenderFilter} 
       statusFilter={statusFilter} setStatusFilter={setStatusFilter} />
-      {isLoading ? <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div >
+      {isLoading ? <div className='w-full flex justify-center items-center'><Loader  size={50} /></div >
       :isError && charactersError instanceof AxiosError ? <div>{toast.error(charactersError?.response?.data.error)}</div> 
       :data && <div>
       <Navigate to={`/characters/?${queryFilters}`} />
@@ -97,10 +110,7 @@ return (
     <Pagination color="primary" MuiPaginationItem-textSecondary count={data.data.info.pages} page={page} onChange={handleChange} />
       </div>
     </div>
-
     }
-     
-      
       </motion.div>
   )
 }
@@ -120,7 +130,7 @@ import { ICharacter } from "../generalTypes";
 import { useEffect, useState } from 'react'
 import FilterCharacter from '../components/Layout/FilterCharacter';
 import Loader from '../components/Loader';
-import { GroupBase, OptionsOrGroups } from 'react-select';
+import { characterNamesList } from '../api';
 
 
 

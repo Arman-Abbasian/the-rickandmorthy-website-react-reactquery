@@ -61,17 +61,16 @@ function Episodes() {
            }
 
       return (
-        <div className="flex flex-col gap-10">
-        <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8">
+        <div className={`${isEpisodesLoading && 'w-full'}`}>
+        <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8 w-full">
         <ReactSelectFilter placeHolder="search name..." value={nameFilter} options={episodeNamesList} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
         <ReactSelectFilter placeHolder="search episode..." value={episodeFilter} options={episodeEpisodesList} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
       </div>
-    {isEpisodesLoading ? <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>:false}
+    {isEpisodesLoading ? <div className='w-full flex justify-center items-center'><Loader  size={50} /></div>:false}
     {isEpisodesError && episodesError instanceof AxiosError && <div>{toast.error(episodesError?.response?.data?.error)}</div>}
     {episodeData && episodeCharactersData &&
     <motion.div variants={loadPageWithAnimation} initial="initial" animate="animate">
       <Navigate to={`/episodes/?${queryFilters}`} />
-      
       <div className='container mx-auto max-w-6xl'>
     <div className="flex flex-wrap  justify-center lg:justify-start gap-4">
         {episodeData && episodeCharactersData &&  episodeData.data.results.map((item:IEpisode)=>(
@@ -114,7 +113,7 @@ function Episode({episode,characters}:IEpisodeProps) {
       <div className='flex-1 flex flex-col  p-3'>
         <div className='flex flex-col gap-0.5 h-12 mb-3'>
           <p>episode: {episode.episode}</p>
-          <p>name: {episode.name.length>20 ? episode.name.substring(0,20)+"...":episode.name}</p>
+          <p>name: {episode.name.length>16 ? episode.name.substring(0,16)+"...":episode.name}</p>
           <h2  className="font-bold">characters</h2>
         </div>
         <div className="h-24 scrollBar">
