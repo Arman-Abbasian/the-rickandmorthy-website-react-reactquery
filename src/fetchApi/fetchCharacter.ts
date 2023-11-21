@@ -2,15 +2,15 @@ import { useQuery } from "@tanstack/react-query";
 import api from "../utils/axiosUtils";
 
 //!Qeury function for get characters
-const fetchCharacters=async(queryFilters:string)=>{
-    const data=await api.get(`/character?${queryFilters}`)
+const fetchCharacters=async(page:number,name:string,status:string,gender:string)=>{
+    const data=await api.get(`/character`,{params:{page,name,status,gender}})
     return data
   }
 
-  export const useCharacters=(page:number,nameFilter:string,statusFilter:string,genderFilter:string,queryFilters:string)=>{
+  export const useCharacters=(page:number,name:string,status:string,gender:string)=>{
    return  useQuery({
-    queryKey: ['characters',page,nameFilter,statusFilter,genderFilter],
-    queryFn:()=> fetchCharacters(queryFilters),
+    queryKey: ['characters',page,name,status,gender],
+    queryFn:()=> fetchCharacters(page,name,status,gender),
     refetchOnMount:true,
     refetchOnReconnect:true,
     refetchOnWindowFocus:true,

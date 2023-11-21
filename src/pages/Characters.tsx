@@ -53,11 +53,11 @@ useEffect(()=>{
   if(statusFilter) searchParams.status=statusFilter
   if(genderFilter) searchParams.gender=genderFilter
 
-  //! quryFilters is all the quryString that we want to stick to the url
+  //! queryFilters is all the queryString that we want to stick to the url
   const queryFilters:string=queryString.stringify(searchParams);
   
   //! useQuery function for characters
-  const { isLoading, isError, data,error:charactersError } = useCharacters(page,name,statusFilter,genderFilter,queryFilters)
+  const { isLoading, isError, data,error:charactersError } = useCharacters(page,name,statusFilter,genderFilter)
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value)

@@ -8,9 +8,8 @@ import { Navigate } from "react-router-dom";
 import { Pagination } from "@mui/material";
 import { useEpisodeCharacters, useEpisodes } from "../fetchApi/fetchEpisode";
 import {motion} from 'framer-motion'
-import api from "../utils/axiosUtils";
-import { GroupBase, OptionsOrGroups } from "react-select";
 import { AxiosError } from "axios";
+import { episodeEpisodesList, episodeNamesList } from "../api";
 
 interface ISearchParams{
   page:number;
@@ -26,31 +25,14 @@ function Episodes() {
   const [page,setPage]=useState<number>(1);
   const [nameFilter,setNameFilter]=useState<string>("");
   const [episodeFilter,setEpisodeFilter]=useState<string>("");
-  const [namesOfEachPage,setNamesOfEachPage]=useState<OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>>([]);
-  const [episodesOfEachPage,setEpisodesOfEachPage]=useState<OptionsOrGroups<IReactSelectOption, GroupBase<IReactSelectOption>>>([]);
 
-  useEffect(()=>{
-    const getNameAndEpisodeListOfEachPage=async()=>{
-        const data=await api.get(`episode/?page=${page}`)
-        const pageEpisodes:IEpisode[]=data.data.results;
-       const names:IReactSelectOption[]= pageEpisodes.map((item:IEpisode)=>{
-        return {label:item.name,value:item.name}
-       })
-       const episodes:IReactSelectOption[]= pageEpisodes.map((item:IEpisode)=>{
-        return {label:item.episode,value:item.episode}
-       })
-       setNamesOfEachPage(names)
-       setEpisodesOfEachPage(episodes)
-      }
-   getNameAndEpisodeListOfEachPage();
-  },[page])
   const searchParams:ISearchParams={page:page};
   if(nameFilter) searchParams.name=nameFilter;
   if(episodeFilter) searchParams.episode=episodeFilter;
   const queryFilters:string=queryString.stringify(searchParams);
   //! useQuery to get all episodes
     const { isLoading:isEpisodesLoading, isError:isEpisodesError, 
-      data:episodeData,error:episodesError } = useEpisodes(page,nameFilter,episodeFilter,queryFilters)
+      data:episodeData,error:episodesError } = useEpisodes(page,nameFilter,episodeFilter)
       useEffect(()=>{
         setPage(1)
       },[nameFilter,episodeFilter]);
@@ -81,8 +63,8 @@ function Episodes() {
       return (
         <div className="flex flex-col gap-10">
         <div className="container max-w-sm mx-auto flex flex-col gap-3 mb-8">
-        <ReactSelectFilter placeHolder="search name..." value={nameFilter} options={episodesOfEachPage} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
-        <ReactSelectFilter placeHolder="search episode..." value={episodeFilter} options={namesOfEachPage} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
+        <ReactSelectFilter placeHolder="search name..." value={nameFilter} options={episodeNamesList} chnageReaceSelectHandler={chnageReaceSelectNamesHandler} />
+        <ReactSelectFilter placeHolder="search episode..." value={episodeFilter} options={episodeEpisodesList} chnageReaceSelectHandler={chnageReaceSelectEpisodesHandler}/>
       </div>
     {isEpisodesLoading ? <div className='w-full h-screen flex justify-center items-center'><Loader  size={50} /></div>:false}
     {isEpisodesError && episodesError instanceof AxiosError && <div>{toast.error(episodesError?.response?.data?.error)}</div>}
@@ -108,8 +90,6 @@ function Episodes() {
 }
 
 export default Episodes;
-
-
 
 
 
