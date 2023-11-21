@@ -69,7 +69,6 @@ useEffect(()=>{
       const characters:ICharacter[]=data.results
       setReactSelectOption(characters.map(item=>({label:item.name,value:item.name}))) 
     })
-    .catch(err=>toast.error(err.data.message))
   },[])
 
 const chnageReaceSelectHandler=(e:unknown)=>{
