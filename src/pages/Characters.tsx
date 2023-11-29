@@ -60,6 +60,7 @@ useEffect(()=>{
   const { isLoading, isError, data,error:charactersError } = useCharacters(page,name,statusFilter,genderFilter)
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    console.log(event)
     setPage(value)
   };
 

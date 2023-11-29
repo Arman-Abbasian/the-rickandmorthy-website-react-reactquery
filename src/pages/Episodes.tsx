@@ -38,6 +38,7 @@ function Episodes() {
       },[nameFilter,episodeFilter]);
 
       const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        console.log(event)
         setPage(value)
       };
 
