@@ -5,7 +5,7 @@ function Layout() {
   return (
     <div className="flex gap-8 p-4">
         <Navbar />
-        <div className='flex-1 ml-[45px] flex justify-center w-full '>
+        <div className='flex-1 ml-[55px] flex justify-center w-full '>
         <Outlet />
         </div>
     </div>
