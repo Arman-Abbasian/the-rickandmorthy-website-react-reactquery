@@ -5,7 +5,7 @@ function Layout() {
   return (
     <div className="flex gap-8 p-4">
         <Navbar />
-        <div className='flex-1 ml-[80px] flex justify-center w-full '>
+        <div className='flex-1 ml-[45px] flex justify-center w-full '>
         <Outlet />
         </div>
     </div>
@@ -44,7 +44,7 @@ const listItem = {
 
 function Navbar() {
   return (
-        <aside className="w-16 flex justify-center fixed left-4 top-4 h-screen bg-color-dark-primary overflow-y-auto rounded-tl-md rounded-bl-md" >
+        <aside className="w-16 flex justify-center fixed left-0 top-4 h-screen bg-color-dark-primary overflow-y-auto rounded-tl-md rounded-bl-md" >
             <motion.ul className="flex flex-col gap-6 justify w-full" variants={listinProrityShowVariant} initial="initial" animate="animate">
               <SidebarItem text='episodes' to=''><HiOutlineFilm   /></SidebarItem>
                 <SidebarItem text='characters' to='characters'><BsPerson /></SidebarItem>
