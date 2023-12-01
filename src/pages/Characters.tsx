@@ -125,7 +125,8 @@ export default Characters
 
 
 //! one character item
-import { FcBusinesswoman, FcBusinessman } from "react-icons/fc";
+import { FcBusinesswoman, FcBusinessman,FcQuestions  } from "react-icons/fc";
+import { FaGenderless } from "react-icons/fa";
 import { AiOutlineEye } from "react-icons/ai";
 import { ICharacter } from "../generalTypes";
 import { useEffect, useState } from 'react'
@@ -154,13 +155,14 @@ function Character({character}:IProps) {
         <div className='flex-1 flex flex-col justify-between gap-5'>
         <div className='flex gap-1 items-center'>
           {character.gender==="Male"?<FcBusinessman className="mobile-icon hover:cursor-pointer"/>
-          :<FcBusinesswoman className="mobile-icon hover:cursor-pointer"/>
+          :character.gender==="Female"?<FcBusinesswoman className="mobile-icon hover:cursor-pointer"/>
+          :character.gender==="Genderless"?<FaGenderless className="mobile-icon hover:cursor-pointer"/>
+          :<FcQuestions className="mobile-icon hover:cursor-pointer"/>
           }
-        
           <p className={`text-ellipsis overflow-hidden`}>{character.name.length>20 ? character.name.substring(0,20)+"...":character.name}</p>
         </div>
         <div className='flex gap-1 items-center'>
-          <span className={`w-2 h-2 rounded-full 
+          <span className={`w-[1rem] h-[1rem] rounded-full 
           ${character.status==="Alive"?"bg-green-400":character.status==="Dead"?"bg-red-400":"bg-yellow-400"}`}></span>
           <p>{character.status}-</p>
           <p>{character.species}</p>

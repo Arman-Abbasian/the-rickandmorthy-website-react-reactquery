@@ -74,7 +74,8 @@ export default CharacterDetail;
 
 
 
-import { FcBusinesswoman, FcBusinessman } from "react-icons/fc";
+import { FcBusinesswoman, FcBusinessman,FcQuestions } from "react-icons/fc";
+import { FaGenderless } from "react-icons/fa";
 import { CiLocationOn ,  } from "react-icons/ci";
 import { ReactNode, useState } from "react";
 import { useCharacter, useCharacterEpisodes } from "../fetchApi/fetchCharacter";
@@ -93,14 +94,16 @@ function CharacterDetailMain({character}:ICharacterDetailMainProps) {
       <div className='flex-1 flex flex-col  px-3 py-1'>
         <div className='flex-1 flex flex-col justify-between gap-5'>
         <p className='flex gap-1 items-center'>
-          {character.gender==="Male"?<FcBusinessman className="mobile-icon hover:cursor-pointer"/>
-          :<FcBusinesswoman className="mobile-icon hover:cursor-pointer"/>
+        {character.gender==="Male"?<FcBusinessman className="mobile-icon hover:cursor-pointer"/>
+          :character.gender==="Female"?<FcBusinesswoman className="mobile-icon hover:cursor-pointer"/>
+          :character.gender==="Genderless"?<FaGenderless className="mobile-icon hover:cursor-pointer"/>
+          :<FcQuestions className="mobile-icon hover:cursor-pointer"/>
           }
         
           <p className={`text-ellipsis overflow-hidden`}>{character.name.length>20 ? character.name.substring(0,20)+"...":character.name}</p>
         </p>
         <div className="flex gap-1 items-center">
-          <span className={`w-2 h-2 rounded-full 
+          <span className={`w-[1rem] h-[1rem] rounded-full 
           ${character.status==="Alive"?"bg-green-400":character.status==="Dead"?"bg-red-400":"bg-yellow-400"}`}></span>
           <p>{character.status}-</p>
           <p>{character.species}</p>
