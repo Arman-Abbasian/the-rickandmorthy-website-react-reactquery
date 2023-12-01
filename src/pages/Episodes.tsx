@@ -105,7 +105,7 @@ const hoverCharacter={
 }
 function Episode({episode,characters}:IEpisodeProps) {
   return (
-    <motion.div whileHover={hoverCharacter} className='flex h-36 w-[340px] rounded-md overflow-hidden text-xs bg-color-secondary'>
+    <motion.div whileHover={hoverCharacter} className='flex h-36 w-[310px] rounded-md overflow-hidden text-xs bg-color-secondary'>
       {/*! image section */}
       <div>
         <img className='w-full h-full object-cover' src={'/images/episodePoster.png'} alt={episode.episode} />
