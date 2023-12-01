@@ -105,7 +105,7 @@ const hoverCharacter={
 }
 function Episode({episode,characters}:IEpisodeProps) {
   return (
-    <motion.div whileHover={hoverCharacter} className='flex h-36 w-[310px] rounded-md overflow-hidden text-xs bg-color-secondary'>
+    <motion.div whileHover={hoverCharacter} className='flex h-36 w-[320px] rounded-md overflow-hidden text-xs bg-color-secondary'>
       {/*! image section */}
       <div>
         <img className='w-full h-full object-cover' src={'/images/episodePoster.png'} alt={episode.episode} />
@@ -114,7 +114,7 @@ function Episode({episode,characters}:IEpisodeProps) {
       <div className='flex-1 flex flex-col  p-3'>
         <div className='flex flex-col gap-0.5 h-12 mb-3'>
           <p>episode: {episode.episode}</p>
-          <p>name: {episode.name.length>16 ? episode.name.substring(0,16)+"...":episode.name}</p>
+          <p>name: {episode.name.length>13 ? episode.name.substring(0,13)+"...":episode.name}</p>
           <h2  className="font-bold">characters</h2>
         </div>
         <div className="h-24 scrollBar">
