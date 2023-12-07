@@ -73,7 +73,7 @@ function Episodes() {
     <motion.div variants={loadPageWithAnimation} initial="initial" animate="animate">
       <Navigate to={`/episodes/?${queryFilters}`} />
       <div className='container mx-auto max-w-6xl'>
-    <div className="flex flex-wrap  justify-center lg:justify-start gap-4">
+    <div className="flex flex-wrap  justify-center gap-4">
         {episodeData && episodeCharactersData &&  episodeData.data.results.map((item:IEpisode)=>(
             <Episode episode={item} characters={episodeCharactersData.data.results}   />
         ))}
