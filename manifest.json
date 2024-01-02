@@ -3,7 +3,7 @@
     "name": "Rick & Morthy PWA App",
     "icons": [
         {
-            "src": "/images/logo.png",
+            "src": "/images/Rick&Morthy logo.png",
             "type": "image/png",
             "sizes": "1024x1024"
         }
