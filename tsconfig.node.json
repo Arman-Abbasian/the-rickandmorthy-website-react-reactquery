@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
     "composite": true,
-    "types": [
-      "vite-plugin-pwa/client"
-    ],
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
