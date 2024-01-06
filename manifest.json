@@ -89,7 +89,7 @@
             "purpose":"any maskable"
         }
     ],
-    "start_url": "./build",
+    "start_url": "https://rick-and-morthy-animation.onrender.com/",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
