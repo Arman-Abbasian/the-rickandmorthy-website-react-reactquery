@@ -16,9 +16,9 @@
 <p width="960" style="padding-right:40px;" align="left" >react-toastify</p>
 
 # summary of project
-This project is a fullstack project (MERN stack), that use from mongodb, expressjs, react and nodejs to handle a chat and login/signup pages. 
-validation in front-end has done with react-hook-form on form elements.
-user can signup or login even with google account.chat page that used from socket.io to handle the chat process and the chats store in mongo cloud as database
+This project is a frontend project that use from react, reactQuery, typescript to make a rick And morthy website. 
+in this project we use from the Rick and Morty API to send request to this APIs. this APIs handle the pagination and  filters that we handle them from front side by
+query string.
 
 # overview of project
 
