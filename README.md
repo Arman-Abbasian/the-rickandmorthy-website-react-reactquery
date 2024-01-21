@@ -7,6 +7,7 @@
  <img src="https://seeklogo.com/images/R/react-query-logo-1340EA4CE9-seeklogo.com.png" width="36" alt="reqctQuery" style="padding-right:10px;" align="left" />
  <img src="https://logowik.com/content/uploads/images/pwa-progressive-web-apps2549.logowik.com.webp" width="50" alt="PWA" style="padding-right:10px;" align="left" />
  <img src="https://mui.com/static/logo.png" width="36"  alt="materialui" style="padding-right:10px;" align="left" />
+  <img src="https://user-images.githubusercontent.com/38039349/60953119-d3c6f300-a2fc-11e9-9596-4978e5d52180.png"  alt="motion" width="36" alt="Terminal"  style="padding-right:10px;" align="left" />
  <br />
  <br />
  <br />
