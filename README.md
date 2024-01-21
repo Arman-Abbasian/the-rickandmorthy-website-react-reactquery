@@ -15,7 +15,7 @@
 # summary of project
 This project is a frontend project that use from react, reactQuery, typescript to make a rick And morthy website. 
 in this project we use from the Rick and Morty API to send request to this APIs. this APIs handle the pagination and  filters that we handle them from front side by
-query string.
+query strings.
 
 # overview of project
 
