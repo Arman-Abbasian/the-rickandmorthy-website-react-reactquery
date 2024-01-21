@@ -11,10 +11,6 @@
  <br />
  <br />
 
-<p width="960" style="padding-right:40px;" align="left" >cors</p>
-<p width="960" style="padding-right:40px;" align="left" >bcrypt</p>
-<p width="960" style="padding-right:40px;" align="left" >cookie-session</p>
-<p width="960" style="padding-right:40px;" align="left" >react-toastify</p>
 
 # summary of project
 This project is a frontend project that use from react, reactQuery, typescript to make a rick And morthy website. 
