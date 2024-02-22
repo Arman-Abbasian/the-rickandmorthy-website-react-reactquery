@@ -89,7 +89,7 @@
             "purpose":"any maskable"
         }
     ],
-    "start_url": "/episodes",
+    "start_url": "https://rick-and-morthy-animation.onrender.com/episodes",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
