@@ -89,7 +89,7 @@
             "purpose":"any maskable"
         }
     ],
-    "start_url": "/",
+    "start_url": "/episodes",
     "display": "standalone",
     "theme_color": "#000000",
     "background_color": "#ffffff"
