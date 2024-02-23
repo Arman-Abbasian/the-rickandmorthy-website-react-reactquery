@@ -4,7 +4,7 @@
      "start_url": "https://www.rick-and-morthy-animation.onrender.com/episodes",
     "display": "standalone",
     "theme_color": "#000000",
-    "background_color": "#ffffff"
+    "background_color": "#ffffff",
      "scope": "/",
     "icons": [
         {
