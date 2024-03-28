@@ -14,10 +14,7 @@
 
 
 # summary of project
-This project is a frontend project that use from react, reactQuery, typescript and PWA to make a rick And morthy website. 
-we use   Rick and Morty API in this project. this APIs handle the pagination and  filters that we handle them from front side by
-query strings.
-at last we use from PWA to have ability to use this website as app in mobile and desktop
+
 
 # overview of project
 
