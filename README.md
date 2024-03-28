@@ -14,7 +14,13 @@
 
 
 # summary of project
+In this project, I tried to utilize React, TypeScript, React Query, PWA, and the Rick and Morty API to implement a React-PWA app. The Rick and Morty API provides filter options that can be sent through query strings.
 
+Challenges:
+- Using TypeScript in React
+- Managing the manifest.json and service worker in a PWA app
+- Handling filter options via query strings and updating them
+- Utilizing React Query package to manage states
 
 
 # overview of project
